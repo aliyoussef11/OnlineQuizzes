@@ -25,6 +25,8 @@ namespace OnlineQuizzes.Models
         {
         }
 
+        public DbSet<Quiz> Quizzes { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
