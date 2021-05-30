@@ -253,10 +253,19 @@
     <Compile Include="Migrations\202105301934392_CreateQuizzesTable.designer.cs">
       <DependentUpon>202105301934392_CreateQuizzesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105302120505_CreateQuestionTypesTable.cs" />
+    <Compile Include="Migrations\202105302120505_CreateQuestionTypesTable.Designer.cs">
+      <DependentUpon>202105302120505_CreateQuestionTypesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105302123222_PopulateSomeQuestionsTypes.cs" />
+    <Compile Include="Migrations\202105302123222_PopulateSomeQuestionsTypes.Designer.cs">
+      <DependentUpon>202105302123222_PopulateSomeQuestionsTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -343,6 +352,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105301934392_CreateQuizzesTable.resx">
       <DependentUpon>202105301934392_CreateQuizzesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105302120505_CreateQuestionTypesTable.resx">
+      <DependentUpon>202105302120505_CreateQuestionTypesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105302123222_PopulateSomeQuestionsTypes.resx">
+      <DependentUpon>202105302123222_PopulateSomeQuestionsTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

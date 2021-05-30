@@ -42,7 +42,12 @@ namespace OnlineQuizzes.Controllers
             db.Quizzes.Add(quiz);
             db.SaveChanges();
 
-            return RedirectToAction("DisplayQuesionsPage", "Trainers");
+            return RedirectToAction("DisplayQuestionsPage", "Trainers");
+        }
+
+        public ActionResult DisplayQuestionsPage()
+        {
+            return View("AddQuestions");
         }
     }
 }
