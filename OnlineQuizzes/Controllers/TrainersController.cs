@@ -99,7 +99,7 @@ namespace OnlineQuizzes.Controllers
             }
             else
             {
-                return View();
+                return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID });
             }
         }
 
@@ -120,6 +120,12 @@ namespace OnlineQuizzes.Controllers
             db.SaveChanges();
 
             return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID});
+        }
+        
+        public ActionResult ListOfMyQuizzes()
+        {
+            var myQuizzes = db.Quizzes.Where(c => c.TrainerName == User.Identity.Name).ToList();
+            return View(myQuizzes);
         }
     }
 }

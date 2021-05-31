@@ -487,6 +487,7 @@
     <Content Include="Views\Trainers\AddQuestionFormPage.cshtml" />
     <Content Include="Views\Trainers\AddQuestions.cshtml" />
     <Content Include="Views\Trainers\AddMCQAnswers.cshtml" />
+    <Content Include="Views\Trainers\ListOfMyQuizzes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

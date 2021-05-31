@@ -1,0 +1,52 @@
+﻿@model IEnumerable<OnlineQuizzes.Models.Quiz>
+
+@{
+    ViewBag.Title = "ListOfMyQuizzes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListOfMyQuizzes</h2>
+
+<p>
+    @Html.ActionLink("Add A New Quiz", "CreateQuizPage", "Trainers", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuizName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationOfQuiz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeOfQuiz)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuizName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationOfQuiz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeOfQuiz)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.QuizID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.QuizID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.QuizID })
+        </td>
+    </tr>
+}
+
+</table>
