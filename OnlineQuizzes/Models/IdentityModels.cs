@@ -28,6 +28,7 @@ namespace OnlineQuizzes.Models
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<QuestionType> QuestionTypes { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<MCQAnswers> MCQAnswers { get; set; }
 
 
         public static ApplicationDbContext Create()

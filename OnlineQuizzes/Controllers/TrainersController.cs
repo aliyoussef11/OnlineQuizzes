@@ -44,7 +44,7 @@ namespace OnlineQuizzes.Controllers
             db.Quizzes.Add(quiz);
             db.SaveChanges();
 
-            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = quiz.QuizID } );
+            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = quiz.QuizID });
         }
 
         public ActionResult DisplayQuestionsPage(int QuizID)
@@ -88,7 +88,38 @@ namespace OnlineQuizzes.Controllers
             db.Questions.Add(question);
             db.SaveChanges();
 
-            return View(question.QuestionID);
+            if (question.TypeId == 1)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    questionID = question.QuestionID,
+                    quizID = QuizID,
+                };
+                return View("AddMCQAnswers", viewModel);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddMCQQuestion(int QuizID, MCQAnswers mCQAnswers)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    questionID = mCQAnswers.QuestionID,
+                    quizID = QuizID,
+                };
+                return View("AddMCQAnswers", viewModel);
+            }
+
+            db.MCQAnswers.Add(mCQAnswers);
+            db.SaveChanges();
+
+            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID});
         }
     }
 }

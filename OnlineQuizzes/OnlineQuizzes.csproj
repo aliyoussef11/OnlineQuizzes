@@ -407,15 +407,21 @@
     <Compile Include="Migrations\202105302156076_CreateQuestionsTable.Designer.cs">
       <DependentUpon>202105302156076_CreateQuestionsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105310504258_CreateMCQAnswersTable.cs" />
+    <Compile Include="Migrations\202105310504258_CreateMCQAnswersTable.Designer.cs">
+      <DependentUpon>202105310504258_CreateMCQAnswersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MCQAnswers.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
     <Compile Include="ViewModels\QuestionsWithQuizID.cs" />
   </ItemGroup>
@@ -480,6 +486,7 @@
     <Content Include="Views\Trainers\CreateQuiz.cshtml" />
     <Content Include="Views\Trainers\AddQuestionFormPage.cshtml" />
     <Content Include="Views\Trainers\AddQuestions.cshtml" />
+    <Content Include="Views\Trainers\AddMCQAnswers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -512,6 +519,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105302156076_CreateQuestionsTable.resx">
       <DependentUpon>202105302156076_CreateQuestionsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105310504258_CreateMCQAnswersTable.resx">
+      <DependentUpon>202105310504258_CreateMCQAnswersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
