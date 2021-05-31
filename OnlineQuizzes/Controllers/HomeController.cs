@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +13,18 @@ namespace OnlineQuizzes.Controllers
     {
         public ActionResult Index()
         {
+         
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Trainer"))
+                {
+                    return RedirectToAction("Index", "Trainers");
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    return RedirectToAction("Index", "Students");
+                }
+            }
             return View();
         }
 
