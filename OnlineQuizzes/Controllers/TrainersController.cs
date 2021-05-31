@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using OnlineQuizzes.Models;
+using OnlineQuizzes.ViewModels;
 
 namespace OnlineQuizzes.Controllers
 {
@@ -42,12 +44,51 @@ namespace OnlineQuizzes.Controllers
             db.Quizzes.Add(quiz);
             db.SaveChanges();
 
-            return RedirectToAction("DisplayQuestionsPage", "Trainers");
+            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = quiz.QuizID } );
         }
 
-        public ActionResult DisplayQuestionsPage()
+        public ActionResult DisplayQuestionsPage(int QuizID)
         {
-            return View("AddQuestions");
+            var QuestionsOfThisQuiz = db.Questions.Include(c => c.Quiz).Where(s => s.QuizId == QuizID).ToList();
+            var viewModel = new QuestionsWithQuizID
+            {
+                questions = QuestionsOfThisQuiz,
+                quizID = QuizID,
+            };
+            return View("AddQuestions", viewModel);
+        }
+
+        public ActionResult AddQuestionPage(int QuizID)
+        {
+            var typeOfQuestions = db.QuestionTypes.ToList();
+            var viewModel = new NewQuestionViewModel
+            {
+                questionTypes = typeOfQuestions,
+                quizID = QuizID,
+            };
+
+            return View("AddQuestionFormPage", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ShowAnswerPage(int QuizID, Question question)
+        {
+            if (!ModelState.IsValid)
+            {
+                var typeOfQuestions = db.QuestionTypes.ToList();
+                var viewModel = new NewQuestionViewModel
+                {
+                    questionTypes = typeOfQuestions,
+                    quizID = QuizID,
+                };
+
+                return View("AddQuestionFormPage", viewModel);
+            }
+
+            db.Questions.Add(question);
+            db.SaveChanges();
+
+            return View(question.QuestionID);
         }
     }
 }

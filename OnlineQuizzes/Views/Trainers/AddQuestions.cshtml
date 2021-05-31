@@ -1,0 +1,49 @@
+﻿@model OnlineQuizzes.ViewModels.QuestionsWithQuizID
+
+@{
+    ViewBag.Title = "AddQuestions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>AddQuestions</h2>
+
+<p>
+    @Html.ActionLink("Add a New Question", "AddQuestionPage", "Trainers", new { QuizID = Model.quizID }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.question.QuestionText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.question.QuestionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.question.GradeOfQuestion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.questions)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.QuestionText)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.QuestionType.Type)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GradeOfQuestion)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.QuestionID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.QuestionID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.QuestionID })
+    </td>
+</tr>
+    }
+</table>
+
+
