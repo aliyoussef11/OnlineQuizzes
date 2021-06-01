@@ -30,7 +30,12 @@ namespace OnlineQuizzes.Controllers
 
         public ActionResult CreateQuizPage()
         {
-            return View("CreateQuiz");
+            var categories = db.Categories.ToList();
+            var viewModel = new NewQuizViewModel
+            {
+                categories = categories,
+            };
+            return View("CreateQuiz", viewModel);
         }
 
         [HttpPost]
@@ -38,7 +43,13 @@ namespace OnlineQuizzes.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("CreateQuiz", quiz);
+                var categories = db.Categories.ToList();
+                var viewModel = new NewQuizViewModel
+                {
+                    categories = categories,
+                    quiz = quiz
+                };
+                return View("CreateQuiz", viewModel);
             }
 
             db.Quizzes.Add(quiz);

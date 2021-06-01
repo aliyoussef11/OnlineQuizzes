@@ -411,8 +411,17 @@
     <Compile Include="Migrations\202105310504258_CreateMCQAnswersTable.Designer.cs">
       <DependentUpon>202105310504258_CreateMCQAnswersTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106010218203_CreateCategoriesTable.cs" />
+    <Compile Include="Migrations\202106010218203_CreateCategoriesTable.Designer.cs">
+      <DependentUpon>202106010218203_CreateCategoriesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106010637572_PopulateCategoriesTable.cs" />
+    <Compile Include="Migrations\202106010637572_PopulateCategoriesTable.Designer.cs">
+      <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MCQAnswers.cs" />
@@ -423,6 +432,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
+    <Compile Include="ViewModels\NewQuizViewModel.cs" />
     <Compile Include="ViewModels\QuestionsWithQuizID.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -483,11 +493,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Trainers\Index.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
-    <Content Include="Views\Trainers\CreateQuiz.cshtml" />
     <Content Include="Views\Trainers\AddQuestionFormPage.cshtml" />
     <Content Include="Views\Trainers\AddQuestions.cshtml" />
     <Content Include="Views\Trainers\AddMCQAnswers.cshtml" />
     <Content Include="Views\Trainers\ListOfMyQuizzes.cshtml" />
+    <Content Include="Views\Trainers\CreateQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -523,6 +533,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105310504258_CreateMCQAnswersTable.resx">
       <DependentUpon>202105310504258_CreateMCQAnswersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106010218203_CreateCategoriesTable.resx">
+      <DependentUpon>202106010218203_CreateCategoriesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106010637572_PopulateCategoriesTable.resx">
+      <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

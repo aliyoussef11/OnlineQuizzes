@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -21,7 +22,10 @@ namespace OnlineQuizzes.Models
 
         [Display(Name = "Category Of The Quiz")]
         [Required]
-        public string Category { get; set; }
+        // Generate Foreign Key to Category
+        public int CategoryID { get; set; }
+        [ForeignKey("CategoryID")]
+        public virtual Category Category { get; set; }
 
         [Display(Name = "Duration Of The Quiz")]
         [Range(1,60)]
