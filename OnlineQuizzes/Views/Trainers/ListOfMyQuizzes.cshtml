@@ -4,49 +4,75 @@
     ViewBag.Title = "ListOfMyQuizzes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+@section Scripts{  
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Quizzes').dataTable();
+        });
+    </script>
+}
 
 <h2>ListOfMyQuizzes</h2>
+
 
 <p>
     @Html.ActionLink("Add A New Quiz", "CreateQuizPage", "Trainers", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.QuizName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DurationOfQuiz)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TimeOfQuiz)
-        </th>
-        <th></th>
-    </tr>
+<br />
+<body>
+    <table id="Quizzes">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DurationOfQuiz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeOfQuiz)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.QuizName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DurationOfQuiz)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TimeOfQuiz)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.QuizID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.QuizID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.QuizID })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DurationOfQuiz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeOfQuiz)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuizID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuizID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.QuizID })
+            </td>
+        </tr>
+    </tbody>
+        }
 
-</table>
+    </table>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+
+
+
+
