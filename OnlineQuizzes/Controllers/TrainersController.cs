@@ -138,5 +138,80 @@ namespace OnlineQuizzes.Controllers
             var myQuizzes = db.Quizzes.Where(c => c.TrainerName == User.Identity.Name).ToList();
             return View(myQuizzes);
         }
+
+        public ActionResult QuizDetails(int id)
+        {
+            var questionsDetails = db.Questions.Include(c => c.Quiz).Where(s => s.QuizId == id).ToList();
+            var viewModel = new QuestionsWithQuizID
+            {
+                questions = questionsDetails,
+                quizID = id,
+            };
+            return View(viewModel);
+        }
+
+        public ActionResult AddQuestionToListPage(int QuizID)
+        {
+            var typeOfQuestions = db.QuestionTypes.ToList();
+            var viewModel = new NewQuestionViewModel
+            {
+                questionTypes = typeOfQuestions,
+                quizID = QuizID,
+            };
+
+            return View("AddQuestionToListFormPage", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult ShowAnswerPageForList(int QuizID, Question question)
+        {
+            if (!ModelState.IsValid)
+            {
+                var typeOfQuestions = db.QuestionTypes.ToList();
+                var viewModel = new NewQuestionViewModel
+                {
+                    questionTypes = typeOfQuestions,
+                    quizID = QuizID,
+                };
+
+                return View("AddQuestionToListFormPage", viewModel);
+            }
+
+            db.Questions.Add(question);
+            db.SaveChanges();
+
+            if (question.TypeId == 1)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    questionID = question.QuestionID,
+                    quizID = QuizID,
+                };
+                return View("AddMCQAnswersToList", viewModel);
+            }
+            else
+            {
+                return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AddMCQQuestionToList(int QuizID, MCQAnswers mCQAnswers)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    questionID = mCQAnswers.QuestionID,
+                    quizID = QuizID,
+                };
+                return View("AddMCQAnswersToList", viewModel);
+            }
+
+            db.MCQAnswers.Add(mCQAnswers);
+            db.SaveChanges();
+
+            return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
+        }
     }
 }

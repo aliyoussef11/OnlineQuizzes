@@ -505,6 +505,9 @@
     <Content Include="Views\Trainers\AddMCQAnswers.cshtml" />
     <Content Include="Views\Trainers\ListOfMyQuizzes.cshtml" />
     <Content Include="Views\Trainers\CreateQuiz.cshtml" />
+    <Content Include="Views\Trainers\QuizDetails.cshtml" />
+    <Content Include="Views\Trainers\AddQuestionToListFormPage.cshtml" />
+    <Content Include="Views\Trainers\AddMCQAnswersToList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
