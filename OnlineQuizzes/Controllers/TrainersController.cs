@@ -262,5 +262,40 @@ namespace OnlineQuizzes.Controllers
 
             return RedirectToAction("QuizDetails", new { id = QuizID });
         }
+
+        public ActionResult DeleteQuiz(int id)
+        {
+            var QuestionsIDs = db.Questions.Where(c => c.QuizId == id).Select(c => c.QuestionID).ToList();
+            var mCQAnswersIDs = new List<int> ();
+            for (int i=0; i<QuestionsIDs.Count; i++)
+            {
+                int QuestionID = Convert.ToInt32(QuestionsIDs[i]);
+                mCQAnswersIDs.Add(db.MCQAnswers.Where(c => c.QuestionID == QuestionID).Select(c => c.MCQID).SingleOrDefault());
+            }
+
+            for (int i = 0; i < mCQAnswersIDs.Count; i++)
+            {
+                var OneAnswer = db.MCQAnswers.Find(mCQAnswersIDs[i]);
+                if (!(OneAnswer == null))
+                {
+                    db.MCQAnswers.Remove(OneAnswer);
+                    db.SaveChanges();
+                }
+            }
+
+            for (int i = 0; i < QuestionsIDs.Count; i++)
+            {
+                var OneQuestion = db.Questions.Find(QuestionsIDs[i]);
+                db.Questions.Remove(OneQuestion);
+                db.SaveChanges();
+            }
+
+            var Quiz = db.Quizzes.Find(id);
+            db.Quizzes.Remove(Quiz);
+            db.SaveChanges();
+
+            return RedirectToAction("ListOfMyQuizzes");
+
+        }
     }
 }
