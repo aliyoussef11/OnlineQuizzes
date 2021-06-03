@@ -130,9 +130,9 @@ namespace OnlineQuizzes.Controllers
             db.MCQAnswers.Add(mCQAnswers);
             db.SaveChanges();
 
-            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID});
+            return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID });
         }
-        
+
         public ActionResult ListOfMyQuizzes()
         {
             var myQuizzes = db.Quizzes.Where(c => c.TrainerName == User.Identity.Name).ToList();
@@ -212,6 +212,55 @@ namespace OnlineQuizzes.Controllers
             db.SaveChanges();
 
             return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
+        }
+
+        public ActionResult QuestionDetails(int id, int QuizID)
+        {
+            var Question = db.Questions.Find(id);
+            var type = Question.TypeId;
+
+            if (type == 1)
+            {
+                var mcqanswer = db.MCQAnswers.ToList().Where(c => c.QuestionID == id);
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    MCQAnswersList = mcqanswer,
+                    quizID = QuizID,
+                    questionID = id,
+                };
+                return View(viewModel);
+            }
+            return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
+        }
+
+        public ActionResult AddAnswersIfNull(int QuestionID, int QuizID)
+        {
+            var viewModel = new MCQWithQuestionIDViewModel
+            {
+                questionID = QuestionID,
+                quizID = QuizID,
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddAnswersToDbIfNull(MCQAnswers mCQAnswers, int QuizID)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    questionID = mCQAnswers.QuestionID,
+                    MCQAnswers = mCQAnswers,
+                    quizID = QuizID,
+                };
+                return View("AddAnswersIfNull", viewModel);
+            }
+
+            db.MCQAnswers.Add(mCQAnswers);
+            db.SaveChanges();
+
+            return RedirectToAction("QuizDetails", new { id = QuizID });
         }
     }
 }

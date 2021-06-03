@@ -8,6 +8,7 @@ namespace OnlineQuizzes.ViewModels
 {
     public class MCQWithQuestionIDViewModel
     {
+        public IEnumerable<MCQAnswers> MCQAnswersList { get; set; }
         public MCQAnswers MCQAnswers { get; set; }
         public int questionID { get; set; }
         public int quizID { get; set; }

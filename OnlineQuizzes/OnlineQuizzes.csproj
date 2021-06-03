@@ -508,6 +508,8 @@
     <Content Include="Views\Trainers\QuizDetails.cshtml" />
     <Content Include="Views\Trainers\AddQuestionToListFormPage.cshtml" />
     <Content Include="Views\Trainers\AddMCQAnswersToList.cshtml" />
+    <Content Include="Views\Trainers\QuestionDetails.cshtml" />
+    <Content Include="Views\Trainers\AddAnswersIfNull.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

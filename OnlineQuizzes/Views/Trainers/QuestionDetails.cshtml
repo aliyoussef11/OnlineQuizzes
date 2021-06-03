@@ -1,0 +1,63 @@
+﻿@model OnlineQuizzes.ViewModels.MCQWithQuestionIDViewModel
+
+@{
+    ViewBag.Title = "QuestionDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>QuestionDetails</h2>
+@if (Model.MCQAnswersList.Count() == 0)
+{
+<p>
+    @Html.ActionLink("Add Answers", "AddAnswersIfNull", new { QuestionID = Model.questionID, QuizID = Model.quizID }, new { @class = "btn btn-primary" })
+</p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MCQAnswers.FirstPossibleAnswer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCQAnswers.SecondPossibleAnswer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCQAnswers.ThirdPossibleAnswer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCQAnswers.FourthPossibleAnswer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MCQAnswers.CorrectAnswer)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.MCQAnswersList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstPossibleAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondPossibleAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThirdPossibleAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourthPossibleAnswer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorrectAnswer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MCQID })
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Back To Questions", "QuizDetails", new { id = Model.quizID })
+</div>
