@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AddQuestionPage</h2>
+<h2>Add New Question To the Quiz</h2>
 
 @using (Html.BeginForm("ShowAnswerPage", "Trainers", new { QuizID = Model.quizID }))
 {
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>Question</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -61,5 +60,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "DisplayQuestionsPage", new { QuizID = Model.quizID })
 </div>

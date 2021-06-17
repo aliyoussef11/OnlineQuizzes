@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using OnlineQuizzes.Models;
 using OnlineQuizzes.ViewModels;
+using OnlineQuizzes.Extensions;
 
 namespace OnlineQuizzes.Controllers
 {
@@ -110,6 +111,7 @@ namespace OnlineQuizzes.Controllers
             }
             else
             {
+                this.AddNotification("Question Added Successfully", NotificationType.SUCCESS);
                 return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID });
             }
         }
@@ -130,6 +132,7 @@ namespace OnlineQuizzes.Controllers
             db.MCQAnswers.Add(mCQAnswers);
             db.SaveChanges();
 
+            this.AddNotification("Question Added Successfully", NotificationType.SUCCESS);
             return RedirectToAction("DisplayQuestionsPage", "Trainers", new { QuizID = QuizID });
         }
 
@@ -191,6 +194,7 @@ namespace OnlineQuizzes.Controllers
             }
             else
             {
+                this.AddNotification("Question Added Successfully!", NotificationType.SUCCESS);
                 return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
             }
         }
@@ -211,6 +215,7 @@ namespace OnlineQuizzes.Controllers
             db.MCQAnswers.Add(mCQAnswers);
             db.SaveChanges();
 
+            this.AddNotification("Question Added Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
         }
 
@@ -230,6 +235,7 @@ namespace OnlineQuizzes.Controllers
                 };
                 return View(viewModel);
             }
+            this.AddNotification("This Type Of Questions Doesn't Contain Answers!", NotificationType.WARNING);
             return RedirectToAction("QuizDetails", "Trainers", new { id = QuizID });
         }
 
@@ -294,6 +300,7 @@ namespace OnlineQuizzes.Controllers
             db.Quizzes.Remove(Quiz);
             db.SaveChanges();
 
+            this.AddNotification("Quiz Deleted Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("ListOfMyQuizzes");
 
         }

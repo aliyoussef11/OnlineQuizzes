@@ -5,10 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>QuizDetails</h2>
+<h2>Quiz Details</h2>
+<div class="container body-content">
+    @Html.Partial("_Notifications")</div>
 
 <p>
-    @Html.ActionLink("Add New Question", "AddQuestionToListPage", new { QuizID = Model.quizID } ,new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New Question", "AddQuestionToListPage", new { QuizID = Model.quizID }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>

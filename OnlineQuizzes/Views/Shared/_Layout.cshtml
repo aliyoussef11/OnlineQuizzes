@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole("Trainer"))
                     {
-                        <li>@Html.ActionLink("MyOwnQuizzes", "ListOfMyQuizzes", "Trainers")</li>
+                        <li>@Html.ActionLink("My Own Quizzes", "ListOfMyQuizzes", "Trainers")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
