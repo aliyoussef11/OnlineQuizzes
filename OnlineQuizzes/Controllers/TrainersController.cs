@@ -266,6 +266,7 @@ namespace OnlineQuizzes.Controllers
             db.MCQAnswers.Add(mCQAnswers);
             db.SaveChanges();
 
+            this.AddNotification("Answers Added Successfully To The Question", NotificationType.SUCCESS);
             return RedirectToAction("QuizDetails", new { id = QuizID });
         }
 
@@ -303,6 +304,27 @@ namespace OnlineQuizzes.Controllers
             this.AddNotification("Quiz Deleted Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("ListOfMyQuizzes");
 
+        }
+
+        public ActionResult DeleteQuestion(int id, int QuizID)
+        {
+            var McqID = db.MCQAnswers.Where(c => c.QuestionID == id).Select(c => c.MCQID).SingleOrDefault();
+            var MCQ_RelatedTo_Question = db.MCQAnswers.Find(McqID);
+            var Question = db.Questions.Find(id);
+
+            if(!(MCQ_RelatedTo_Question == null)){
+                db.MCQAnswers.Remove(MCQ_RelatedTo_Question);
+                db.Questions.Remove(Question);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Questions.Remove(Question);
+                db.SaveChanges();
+            }
+
+            this.AddNotification("Question Deleted Successfully!", NotificationType.SUCCESS);
+            return RedirectToAction("QuizDetails", new { id = QuizID });
         }
     }
 }
