@@ -55,7 +55,8 @@
                 @Html.DisplayFor(modelItem => item.CorrectAnswer)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditAnswer", new { id = item.MCQID, QuestionID = Model.questionID, QuizID = Model.quizID })
+                @Html.ActionLink("Edit", "EditAnswer", new { id = item.MCQID, QuestionID = Model.questionID, QuizID = Model.quizID }
+            , new { @class = "btn btn-default" })
             </td>
         </tr>
     }

@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.GradeOfQuestion)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditQuestion", new { id = item.QuestionID, QuizID = Model.quizID }) |
-                @Html.ActionLink("Details", "QuestionDetails", new { id = item.QuestionID, QuizID = Model.quizID }) |
-                @Html.ActionLink("Delete", "DeleteQuestion", new { id = item.QuestionID , QuizID = Model.quizID })
+                @Html.ActionLink("Edit", "EditQuestion", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Details", "QuestionDetails", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-info" }) 
+                @Html.ActionLink("Delete", "DeleteQuestion", new { id = item.QuestionID , QuizID = Model.quizID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
