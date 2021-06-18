@@ -326,5 +326,35 @@ namespace OnlineQuizzes.Controllers
             this.AddNotification("Question Deleted Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("QuizDetails", new { id = QuizID });
         }
+
+        public ActionResult EditQuiz(int id)
+        {
+            var categories = db.Categories.ToList();
+            var Quiz = db.Quizzes.Find(id);
+
+            if (Quiz == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", Quiz.CategoryID);
+            return View(Quiz);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditQuiz(Quiz quiz)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", quiz.CategoryID);
+                return View(quiz);
+            }
+
+            db.Entry(quiz).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("ListOfMyQuizzes");
+        }
     }
 }

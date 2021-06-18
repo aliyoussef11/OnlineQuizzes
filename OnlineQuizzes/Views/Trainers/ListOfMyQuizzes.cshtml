@@ -58,7 +58,7 @@
                 @Html.DisplayFor(modelItem => item.TimeOfQuiz)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.QuizID }) |
+                @Html.ActionLink("Edit", "EditQuiz", new { id = item.QuizID }) |
                 @Html.ActionLink("Details", "QuizDetails", new { id = item.QuizID }) |
                 @Html.ActionLink("Delete", "DeleteQuiz", new { id = item.QuizID })
             </td>
