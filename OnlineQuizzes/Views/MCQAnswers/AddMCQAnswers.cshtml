@@ -6,7 +6,7 @@
 }
 
 
-@using (Html.BeginForm("AddMCQQuestion", "Trainers", new { QuizID = Model.quizID }))
+@using (Html.BeginForm("AddMCQQuestion", "MCQAnswers", new { QuizID = Model.quizID }))
 {
     @Html.AntiForgeryToken()
 

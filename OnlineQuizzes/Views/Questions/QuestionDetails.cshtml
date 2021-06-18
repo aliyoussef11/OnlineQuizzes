@@ -12,7 +12,7 @@
 @if (Model.MCQAnswersList.Count() == 0)
 {
 <p>
-    @Html.ActionLink("Add Answers", "AddAnswersIfNull", new { QuestionID = Model.questionID, QuizID = Model.quizID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Answers", "AddAnswersIfNull", "MCQAnswers", new { QuestionID = Model.questionID, QuizID = Model.quizID }, new { @class = "btn btn-primary" })
 </p>
 }
 
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.CorrectAnswer)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditAnswer", new { id = item.MCQID, QuestionID = Model.questionID, QuizID = Model.quizID }
+                @Html.ActionLink("Edit", "EditAnswer", "Trainers", new { id = item.MCQID, QuestionID = Model.questionID, QuizID = Model.quizID }
             , new { @class = "btn btn-default" })
             </td>
         </tr>
@@ -63,5 +63,5 @@
 </table>
 
 <div>
-    @Html.ActionLink("Back To Questions", "QuizDetails", new { id = Model.quizID })
+    @Html.ActionLink("Back To Questions", "QuizDetails", "Quizs", new { id = Model.quizID }, null)
 </div>

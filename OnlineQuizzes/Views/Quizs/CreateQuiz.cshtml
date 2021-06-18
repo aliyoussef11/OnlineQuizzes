@@ -7,7 +7,7 @@
 
 <h2>Create A new Quiz</h2>
 
-@using (Html.BeginForm("CreateNewQuiz", "Trainers"))
+@using (Html.BeginForm("CreateNewQuiz", "Quizs"))
 {
     @Html.AntiForgeryToken()
 
@@ -64,7 +64,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ListOfMyQuizzes")
+    @Html.ActionLink("Back to List", "ListOfMyQuizzes", "Trainers")
 </div>
 
 @section scripts{

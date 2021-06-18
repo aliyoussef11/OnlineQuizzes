@@ -7,7 +7,7 @@
 
 <h2>Add New Question To the Quiz</h2>
 
-@using (Html.BeginForm("ShowAnswerPage", "Trainers", new { QuizID = Model.quizID }))
+@using (Html.BeginForm("ShowAnswerPage", "Questions", new { QuizID = Model.quizID }))
 {
     @Html.AntiForgeryToken()
     

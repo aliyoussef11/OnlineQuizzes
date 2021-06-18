@@ -6,7 +6,7 @@
 }
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
-@section Scripts{  
+@section Scripts{
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
@@ -14,11 +14,12 @@
         });
     </script>
 }
-<br/>
+<br />
 <div class="container body-content">
-    @Html.Partial("_Notifications")</div>
+    @Html.Partial("_Notifications")
+</div>
 <p>
-    @Html.ActionLink("Add A New Quiz", "CreateQuizPage", "Trainers", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add A New Quiz", "CreateQuizPage", "Quizs", null, new { @class = "btn btn-primary" })
 </p>
 <br />
 <body>
@@ -43,27 +44,27 @@
 
         @foreach (var item in Model)
         {
-    <tbody>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuizName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DurationOfQuiz)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeOfQuiz)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditQuiz", new { id = item.QuizID }, new { @class= "btn btn-default"}) 
-                @Html.ActionLink("Details", "QuizDetails", new { id = item.QuizID }, new { @class = "btn btn-info" }) 
-                @Html.ActionLink("Delete", "DeleteQuiz", new { id = item.QuizID }, new { @class = "btn btn-danger" })
-            </td>
-        </tr>
-    </tbody>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuizName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DurationOfQuiz)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeOfQuiz)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditQuiz", new { id = item.QuizID }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Details", "QuizDetails", "Quizs", new { id = item.QuizID }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Delete", "DeleteQuiz", new { id = item.QuizID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            </tbody>
         }
 
     </table>

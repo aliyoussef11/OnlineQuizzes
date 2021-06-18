@@ -10,7 +10,7 @@
     @Html.Partial("_Notifications")</div>
 
 <p>
-    @Html.ActionLink("Add New Question", "AddQuestionToListPage", new { QuizID = Model.quizID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New Question", "AddQuestionToListPage", "Questions", new { QuizID = Model.quizID }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -39,9 +39,9 @@
                 @Html.DisplayFor(modelItem => item.GradeOfQuestion)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditQuestion", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-default" }) 
-                @Html.ActionLink("Details", "QuestionDetails", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-info" }) 
-                @Html.ActionLink("Delete", "DeleteQuestion", new { id = item.QuestionID , QuizID = Model.quizID }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Edit", "EditQuestion", "Trainers", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-default" }) 
+                @Html.ActionLink("Details", "QuestionDetails", "Questions", new { id = item.QuestionID, QuizID = Model.quizID }, new { @class = "btn btn-info" }) 
+                @Html.ActionLink("Delete", "DeleteQuestion", "Trainers",  new { id = item.QuestionID , QuizID = Model.quizID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }

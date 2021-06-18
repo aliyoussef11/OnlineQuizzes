@@ -6,7 +6,7 @@
 
 <h2>Add Question</h2>
 
-@using (Html.BeginForm("ShowAnswerPageForList", "Trainers", new { QuizID = Model.quizID }))
+@using (Html.BeginForm("ShowAnswerPageForList", "Questions", new { QuizID = Model.quizID }))
 {
     @Html.AntiForgeryToken()
 
@@ -60,5 +60,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "QuizDetails", new { id = Model.quizID })
+    @Html.ActionLink("Back to List", "QuizDetails", "Quizs", new { id = Model.quizID }, null)
 </div>

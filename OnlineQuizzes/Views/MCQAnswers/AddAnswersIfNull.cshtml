@@ -7,7 +7,7 @@
 
 <h2>Add Answers</h2>
 
-@using (Html.BeginForm("AddAnswersToDbIfNull", "Trainers", new { QuizID = Model.quizID}))
+@using (Html.BeginForm("AddAnswersToDbIfNull", "MCQAnswers", new { QuizID = Model.quizID}))
 {
     @Html.AntiForgeryToken()
     
