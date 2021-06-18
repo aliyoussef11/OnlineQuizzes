@@ -6,6 +6,9 @@
 }
 
 <h2>QuestionDetails</h2>
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
 @if (Model.MCQAnswersList.Count() == 0)
 {
 <p>
@@ -52,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.CorrectAnswer)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MCQID })
+                @Html.ActionLink("Edit", "EditAnswer", new { id = item.MCQID, QuestionID = Model.questionID, QuizID = Model.quizID })
             </td>
         </tr>
     }

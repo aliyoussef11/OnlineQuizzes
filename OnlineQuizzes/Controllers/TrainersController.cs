@@ -354,7 +354,79 @@ namespace OnlineQuizzes.Controllers
             db.Entry(quiz).State = EntityState.Modified;
             db.SaveChanges();
 
+            this.AddNotification("Quiz Edited Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("ListOfMyQuizzes");
+        }
+
+        public ActionResult EditQuestion(int id, int QuizID)
+        {
+            var typeOfQuestions = db.QuestionTypes.ToList();
+            var question = db.Questions.Find(id);
+            var viewModel = new NewQuestionViewModel
+            {
+                questionTypes = typeOfQuestions,
+                question = question,
+                quizID = QuizID
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditQuestion(Question question, int QuizID)
+        {
+            if (!ModelState.IsValid)
+            {
+                var typeOfQuestions = db.QuestionTypes.ToList();
+                var viewModel = new NewQuestionViewModel
+                {
+                    questionTypes = typeOfQuestions,
+                    question = question,
+                    quizID = QuizID
+                };
+                return View(viewModel);
+            }
+
+            db.Entry(question).State = EntityState.Modified;
+            db.SaveChanges();
+
+            this.AddNotification("Question Edited Successfully!", NotificationType.SUCCESS);
+            return RedirectToAction("QuizDetails", new { id = QuizID});
+        }
+
+        public ActionResult EditAnswer(int id, int QuestionID, int QuizID)
+        {
+            var MCQ = db.MCQAnswers.Find(id);
+            var viewModel = new MCQWithQuestionIDViewModel
+            {
+                MCQAnswers = MCQ,
+                questionID = QuestionID,
+                quizID = QuizID
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAnswer(MCQAnswers mCQAnswers, int QuestionID, int QuizID)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MCQWithQuestionIDViewModel
+                {
+                    MCQAnswers = mCQAnswers,
+                    questionID = QuestionID,
+                    quizID = QuizID
+                };
+                return View(viewModel);
+            }
+
+            db.Entry(mCQAnswers).State = EntityState.Modified;
+            db.SaveChanges();
+
+            this.AddNotification("Answers Edited Successfully!", NotificationType.SUCCESS);
+            return RedirectToAction("QuestionDetails", new { id = QuestionID, QuizID = QuizID });
         }
     }
 }
