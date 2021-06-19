@@ -10,6 +10,7 @@ using OnlineQuizzes.Extensions;
 
 namespace OnlineQuizzes.Controllers
 {
+    [Authorize(Roles = "Trainer")]
     public class QuestionsController : Controller
     {
         private ApplicationDbContext db;

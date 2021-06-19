@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace OnlineQuizzes.Controllers
 {
+    [Authorize(Roles = "Trainer")]
     public class QuizsController : Controller
     {
         private ApplicationDbContext db;

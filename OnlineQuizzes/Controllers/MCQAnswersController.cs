@@ -9,6 +9,7 @@ using OnlineQuizzes.Extensions;
 
 namespace OnlineQuizzes.Controllers
 {
+    [Authorize(Roles = "Trainer")]
     public class MCQAnswersController : Controller
     {
         private ApplicationDbContext db;
