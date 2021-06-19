@@ -33,6 +33,7 @@ namespace OnlineQuizzes.Models
         public int DurationOfQuiz { get; set; }
 
         [Display(Name = "Which Time This Quiz Will Be Available?")]
+        [DateTimeLessThanToday]
         [Required]
         public DateTime TimeOfQuiz { get; set; }
     }
