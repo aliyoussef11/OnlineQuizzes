@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using OnlineQuizzes.ViewModels;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineQuizzes.Controllers
 {
@@ -25,10 +26,21 @@ namespace OnlineQuizzes.Controllers
 
         public ActionResult CreateQuizPage()
         {
-            var categories = db.Categories.ToList();
+            var userId = User.Identity.GetUserId();
+            var majors = db.TrainerMajors.Include(c => c.Category).Where(s => s.Id == userId).Select(c => c.CategoryID).Distinct().ToList();
+
+            List<Category> CurrentMajors = new List<Category>();
+
+            foreach(var OneMajor in majors) {
+                var major = db.Categories.Find(OneMajor);
+                CurrentMajors.Add(major);
+            }
+
+            IEnumerable<Category> categories = CurrentMajors;
+
             var viewModel = new NewQuizViewModel
             {
-                categories = categories,
+                trainerMajors = categories,
             };
             return View("CreateQuiz", viewModel);
         }
@@ -38,10 +50,22 @@ namespace OnlineQuizzes.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var categories = db.Categories.ToList();
+                var userId = User.Identity.GetUserId();
+                var majors = db.TrainerMajors.Include(c => c.Category).Where(s => s.Id == userId).Select(c => c.CategoryID).Distinct().ToList();
+
+                List<Category> CurrentMajors = new List<Category>();
+
+                foreach (var OneMajor in majors)
+                {
+                    var major = db.Categories.Find(OneMajor);
+                    CurrentMajors.Add(major);
+                }
+
+                IEnumerable<Category> categories = CurrentMajors;
+
                 var viewModel = new NewQuizViewModel
                 {
-                    categories = categories,
+                    trainerMajors = categories,
                     quiz = quiz
                 };
                 return View("CreateQuiz", viewModel);

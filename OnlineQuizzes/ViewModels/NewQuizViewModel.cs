@@ -8,7 +8,8 @@ namespace OnlineQuizzes.ViewModels
 {
     public class NewQuizViewModel
     {
-        public IEnumerable<Category> categories { get; set; }
+        public IEnumerable<Category> trainerMajors { get; set; }
         public Quiz quiz { get; set; }
+
     }
 }

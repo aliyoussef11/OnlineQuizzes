@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.quiz.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.quiz.CategoryID, new SelectList(Model.categories, "CategoryID", "CategoryName"),
+                @Html.DropDownListFor(model => model.quiz.CategoryID, new SelectList(Model.trainerMajors, "CategoryID", "CategoryName"),
                 "Choose The Type Of Question", new { @class = "chzn-select" })
                 @Html.ValidationMessageFor(model => model.quiz.CategoryID, "", new { @class = "text-danger" })
             </div>
@@ -71,4 +71,4 @@
     <script type="text/javascript">
         $(".chzn-select").chosen();
     </script>
-    }
+}
