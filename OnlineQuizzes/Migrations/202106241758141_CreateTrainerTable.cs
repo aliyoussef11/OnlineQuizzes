@@ -14,6 +14,8 @@ namespace OnlineQuizzes.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         TrainerName = c.String(nullable: false),
                         PhoneNumber = c.Int(nullable: false),
+                        Degree = c.String(nullable: false),
+                        Experience = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)

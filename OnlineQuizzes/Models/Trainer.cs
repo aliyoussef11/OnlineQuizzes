@@ -21,5 +21,14 @@ namespace OnlineQuizzes.Models
         [Required]
         [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Degree Level")]
+        public string Degree { get; set; }
+
+        [Required]
+        [Display(Name = "Experience")]
+        [Range(1, 30)]
+        public string Experience { get; set; }
     }
 }

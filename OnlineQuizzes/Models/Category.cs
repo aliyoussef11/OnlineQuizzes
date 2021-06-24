@@ -9,6 +9,7 @@ namespace OnlineQuizzes.Models
     public class Category
     {
         [Key]
+        [Display(Name ="Major Name")]
         public int CategoryID { get; set; }
 
         public string CategoryName { get; set; }

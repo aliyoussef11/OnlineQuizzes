@@ -62,14 +62,30 @@ namespace OnlineQuizzes.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class TrainerRegisterViewModel
     {
-        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Trainer Name")]
+        public string TrainerName { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Please Select Major")]
+        public IEnumerable<int> CategoryIDs { get;set; }
+
+        public IEnumerable<Category> Categories { get; set; }
+
+        [Required]
+        [Display(Name = "Degree Level")]
+        public string Degree { get; set; }
+
+        [Required]
+        [Display(Name = "Experience")]
+        [Range(1,30)]
+        public string Experience { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -82,8 +98,8 @@ namespace OnlineQuizzes.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string Role { get; set; }
-
+        [Required]
+        [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
     }
 

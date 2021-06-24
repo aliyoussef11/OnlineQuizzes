@@ -17,11 +17,13 @@ namespace OnlineQuizzes.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            db = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -141,9 +143,14 @@ namespace OnlineQuizzes.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult TrainerRegister()
         {
-            return View();
+            var ListOfCategories = db.Categories.ToList();
+            var viewModel = new TrainerRegisterViewModel
+            {
+                Categories = ListOfCategories
+            };
+            return View(viewModel);
         }
 
         //
@@ -151,29 +158,45 @@ namespace OnlineQuizzes.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> TrainerRegister(TrainerRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
+               
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    if(model.Role == "Student") {
-                        //Temp Code
-                        var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                        var roleManager = new RoleManager<IdentityRole>(roleStore);
-                        await roleManager.CreateAsync(new IdentityRole("Student"));
-                        await UserManager.AddToRoleAsync(user.Id, "Student");
-                    }
-                    else if(model.Role == "Trainer")
-                    {
                         //Temp Code
                         var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                         var roleManager = new RoleManager<IdentityRole>(roleStore);
                         await roleManager.CreateAsync(new IdentityRole("Trainer"));
                         await UserManager.AddToRoleAsync(user.Id, "Trainer");
+
+                    var trainer = new Trainer
+                    {
+                        Id = user.Id,
+                        TrainerName = model.TrainerName,
+                        PhoneNumber = model.PhoneNumber,
+                        Experience = model.Experience,
+                        Degree = model.Degree
+                    };
+
+                    db.Trainers.Add(trainer);
+                    db.SaveChanges();
+
+
+                    var OneMajor = new TrainerMajors
+                    {
+                        Id = user.Id
+                    };
+                    foreach (var major in model.CategoryIDs)
+                    {
+                        OneMajor.CategoryID = major;
+                        db.TrainerMajors.Add(OneMajor);
+                        db.SaveChanges();
                     }
+
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

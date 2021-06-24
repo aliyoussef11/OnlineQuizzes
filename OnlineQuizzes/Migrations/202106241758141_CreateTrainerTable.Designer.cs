@@ -13,7 +13,7 @@ namespace OnlineQuizzes.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202106241215475_CreateTrainerTable"; }
+            get { return "202106241758141_CreateTrainerTable"; }
         }
         
         string IMigrationMetadata.Source

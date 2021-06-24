@@ -423,9 +423,13 @@
     <Compile Include="Migrations\202106010637572_PopulateCategoriesTable.Designer.cs">
       <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202106241215475_CreateTrainerTable.cs" />
-    <Compile Include="Migrations\202106241215475_CreateTrainerTable.Designer.cs">
-      <DependentUpon>202106241215475_CreateTrainerTable.cs</DependentUpon>
+    <Compile Include="Migrations\202106241758141_CreateTrainerTable.cs" />
+    <Compile Include="Migrations\202106241758141_CreateTrainerTable.Designer.cs">
+      <DependentUpon>202106241758141_CreateTrainerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106241906593_CreateTrainerMajorsTable.cs" />
+    <Compile Include="Migrations\202106241906593_CreateTrainerMajorsTable.Designer.cs">
+      <DependentUpon>202106241906593_CreateTrainerMajorsTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -438,6 +442,7 @@
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\Trainer.cs" />
+    <Compile Include="Models\TrainerMajors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
@@ -495,7 +500,7 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\TrainerRegister.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -564,8 +569,11 @@
     <EmbeddedResource Include="Migrations\202106010637572_PopulateCategoriesTable.resx">
       <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106241215475_CreateTrainerTable.resx">
-      <DependentUpon>202106241215475_CreateTrainerTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106241758141_CreateTrainerTable.resx">
+      <DependentUpon>202106241758141_CreateTrainerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241906593_CreateTrainerMajorsTable.resx">
+      <DependentUpon>202106241906593_CreateTrainerMajorsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
