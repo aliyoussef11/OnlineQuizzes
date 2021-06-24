@@ -154,7 +154,7 @@ namespace OnlineQuizzes.Controllers
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/TrainerRegister
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -200,6 +200,77 @@ namespace OnlineQuizzes.Controllers
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ActionResult StudentRegister()
+        {
+            var ListOfCategories = db.Categories.ToList();
+            var viewModel = new StudentRegisterViewModel
+            {
+                Categories = ListOfCategories
+            };
+            return View(viewModel);
+        }
+
+        // POST: /Account/StudentRegister
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> StudentRegister(StudentRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //Temp Code
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    await roleManager.CreateAsync(new IdentityRole("Student"));
+                    await UserManager.AddToRoleAsync(user.Id, "Student");
+
+                    var student = new Student
+                    {
+                        Id = user.Id,
+                        StudentName = model.StudentName,
+                        PhoneNumber = model.PhoneNumber,
+                        Education = model.Education
+                    };
+
+                    db.Students.Add(student);
+                    db.SaveChanges();
+
+
+                    var OneInterest = new StudentInterest
+                    {
+                        Id = user.Id
+                    };
+                    foreach (var interest in model.CategoryIDs)
+                    {
+                        OneInterest.CategoryID = interest;
+                        db.studentInterests.Add(OneInterest);
+                        db.SaveChanges();
+                    }
+
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

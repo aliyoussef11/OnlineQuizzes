@@ -431,6 +431,14 @@
     <Compile Include="Migrations\202106241906593_CreateTrainerMajorsTable.Designer.cs">
       <DependentUpon>202106241906593_CreateTrainerMajorsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106241917212_CreateStudentTable.cs" />
+    <Compile Include="Migrations\202106241917212_CreateStudentTable.Designer.cs">
+      <DependentUpon>202106241917212_CreateStudentTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106241929402_CreateStudentInterestsTable.cs" />
+    <Compile Include="Migrations\202106241929402_CreateStudentInterestsTable.Designer.cs">
+      <DependentUpon>202106241929402_CreateStudentInterestsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -441,6 +449,8 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentInterest.cs" />
     <Compile Include="Models\Trainer.cs" />
     <Compile Include="Models\TrainerMajors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -529,6 +539,7 @@
     <Content Include="Views\Trainers\EditQuiz.cshtml" />
     <Content Include="Views\Trainers\EditQuestion.cshtml" />
     <Content Include="Views\Trainers\EditAnswer.cshtml" />
+    <Content Include="Views\Account\StudentRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -574,6 +585,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106241906593_CreateTrainerMajorsTable.resx">
       <DependentUpon>202106241906593_CreateTrainerMajorsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241917212_CreateStudentTable.resx">
+      <DependentUpon>202106241917212_CreateStudentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241929402_CreateStudentInterestsTable.resx">
+      <DependentUpon>202106241929402_CreateStudentInterestsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
