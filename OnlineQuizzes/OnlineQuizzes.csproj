@@ -423,6 +423,10 @@
     <Compile Include="Migrations\202106010637572_PopulateCategoriesTable.Designer.cs">
       <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106241215475_CreateTrainerTable.cs" />
+    <Compile Include="Migrations\202106241215475_CreateTrainerTable.Designer.cs">
+      <DependentUpon>202106241215475_CreateTrainerTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -433,6 +437,7 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\Trainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
@@ -558,6 +563,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106010637572_PopulateCategoriesTable.resx">
       <DependentUpon>202106010637572_PopulateCategoriesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106241215475_CreateTrainerTable.resx">
+      <DependentUpon>202106241215475_CreateTrainerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

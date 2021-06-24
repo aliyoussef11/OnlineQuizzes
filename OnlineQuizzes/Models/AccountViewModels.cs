@@ -64,6 +64,8 @@ namespace OnlineQuizzes.Models
 
     public class RegisterViewModel
     {
+        public string Name { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -81,6 +83,8 @@ namespace OnlineQuizzes.Models
         public string ConfirmPassword { get; set; }
 
         public string Role { get; set; }
+
+        public int PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel

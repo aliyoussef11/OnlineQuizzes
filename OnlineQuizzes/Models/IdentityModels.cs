@@ -30,6 +30,7 @@ namespace OnlineQuizzes.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<MCQAnswers> MCQAnswers { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Trainer> Trainers { get; set; }
 
 
         public static ApplicationDbContext Create()
