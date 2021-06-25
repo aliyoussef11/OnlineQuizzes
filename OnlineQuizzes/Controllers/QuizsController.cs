@@ -35,24 +35,19 @@ namespace OnlineQuizzes.Controllers
             foreach (var OneMajor in majors) {
                 var major = db.Categories.Find(OneMajor);
                 CurrentMajors.Add(major);
-
-                var studentSameInterests = db.studentInterests.Include(c => c.Student).Include(c => c.Category)
-                    .Where(s => s.CategoryID == OneMajor).ToList();
-                foreach(var OneInterest in studentSameInterests)
-                {
-                    SameInterestsStudent.Add(OneInterest);
-                }
             }
-
-            IEnumerable<Category> categories = CurrentMajors;
             IEnumerable<StudentInterest> studentsInterests = SameInterestsStudent;
 
-            var viewModel = new NewQuizViewModel
-            {
-                trainerMajors = categories,
-                studentInterests = studentsInterests
-            };
-            return View("CreateQuiz", viewModel);
+            ViewBag.CurrentMajors = new SelectList(CurrentMajors, "CategoryID", "CategoryName");
+            return View("CreateQuiz");
+        }
+
+        public ActionResult GetStudents(int CategoryID)
+        {
+            List<StudentInterest> SameInterestsStudent = db.studentInterests.Include(c => c.Student).Where(c => c.CategoryID == CategoryID)
+                .ToList();
+            ViewBag.InterestStudents = new SelectList(SameInterestsStudent, "Id", "Student.StudentName");
+            return PartialView("DisplayStudents");
         }
 
         [HttpPost]
@@ -64,18 +59,19 @@ namespace OnlineQuizzes.Controllers
                 var majors = db.TrainerMajors.Include(c => c.Category).Where(s => s.Id == userId).Select(c => c.CategoryID).Distinct().ToList();
 
                 List<Category> CurrentMajors = new List<Category>();
+                List<StudentInterest> SameInterestsStudent = new List<StudentInterest>();
 
                 foreach (var OneMajor in majors)
                 {
                     var major = db.Categories.Find(OneMajor);
                     CurrentMajors.Add(major);
                 }
+                IEnumerable<StudentInterest> studentsInterests = SameInterestsStudent;
 
-                IEnumerable<Category> categories = CurrentMajors;
+                ViewBag.CurrentMajors = new SelectList(CurrentMajors, "CategoryID", "CategoryName");
 
                 var viewModel = new NewQuizViewModel
                 {
-                    trainerMajors = categories,
                     quiz = quizViewModel.quiz
                 };
                 return View("CreateQuiz", viewModel);

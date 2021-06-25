@@ -554,6 +554,7 @@
     <Content Include="Views\Trainers\EditAnswer.cshtml" />
     <Content Include="Views\Account\StudentRegister.cshtml" />
     <Content Include="Views\Quizs\CreateQuiz.cshtml" />
+    <Content Include="Views\Shared\DisplayStudents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

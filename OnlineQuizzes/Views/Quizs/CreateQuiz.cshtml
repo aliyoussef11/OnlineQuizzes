@@ -11,73 +11,98 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.quiz.TrainerName, htmlAttributes: new { @class = "control-label col-md-2", @style = "display:none" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.quiz.TrainerName, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.Name, @readonly = true, @style = "display:none" } })
-            @Html.ValidationMessageFor(model => model.quiz.TrainerName, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.quiz.TrainerName, htmlAttributes: new { @class = "control-label col-md-2", @style = "display:none" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quiz.TrainerName, new { htmlAttributes = new { @class = "form-control", @Value = User.Identity.Name, @readonly = true, @style = "display:none" } })
+                @Html.ValidationMessageFor(model => model.quiz.TrainerName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.quiz.QuizName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.quiz.QuizName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.quiz.QuizName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.quiz.QuizName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quiz.QuizName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quiz.QuizName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
+        @if (ViewBag.CurrentMajors != null)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.quiz.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.quiz.CategoryID, ViewBag.CurrentMajors as SelectList, "--Select Major--",
+                    new { @class = "form-control", @id = "Categories" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.quiz.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.quiz.CategoryID, new SelectList(Model.trainerMajors, "CategoryID", "CategoryName"),
-            "Choose Quiz Major", new { @class = "chzn-select" })
-            @Html.ValidationMessageFor(model => model.quiz.CategoryID, "", new { @class = "text-danger" })
-        </div>
-    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StudentIDs, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.StudentIDs, new SelectList(""), "--Select Students--",
+                    new { @class = "form-control", @id = "Students" })
+                </div>
+            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.StudentIDs, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.StudentIDs, new SelectList(Model.studentInterests, "Id", "Student.StudentName"),
-            "Choose Students Of Quiz", new { @class = "chzn-select" })
-            @Html.ValidationMessageFor(model => model.StudentIDs, "", new { @class = "text-danger" })
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.quiz.DurationOfQuiz, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quiz.DurationOfQuiz, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quiz.DurationOfQuiz, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.quiz.DurationOfQuiz, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.quiz.DurationOfQuiz, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.quiz.DurationOfQuiz, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.quiz.TimeOfQuiz, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.quiz.TimeOfQuiz, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quiz.TimeOfQuiz, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.quiz.TimeOfQuiz, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.quiz.TimeOfQuiz, new { htmlAttributes = new { @type = "datetime-local", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.quiz.TimeOfQuiz, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
     @Html.ActionLink("Back to List", "ListOfMyQuizzes", "Trainers")
 </div>
 
+
+
 @section scripts{
     <script type="text/javascript">
         $(".chzn-select").chosen();
     </script>
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#Categories").change(function () {
+                var MajorID = $(this).val();
+                debugger
+                $.ajax({
+                    type: "post",
+                    url: "/Quizs/GetStudents?CategoryID=" + MajorID,
+                    contentType: "html",
+                    success: function (response) {
+                        debugger
+                        $("#Students").empty();
+                        $("#Students").append(response);
+                    }
+
+                })
+            })
+        })
+    </script>
+
 }

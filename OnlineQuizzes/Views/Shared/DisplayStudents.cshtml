@@ -1,0 +1,11 @@
+﻿@model OnlineQuizzes.Models.StudentInterest
+
+<option value="">--Select Students--</option>
+
+@if(ViewBag.InterestStudents != null)
+{
+    foreach(var item in ViewBag.InterestStudents)
+    {
+     <option value="@item.Value">@item.Text</option>
+     }
+}
