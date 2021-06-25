@@ -30,23 +30,33 @@ namespace OnlineQuizzes.Controllers
             var majors = db.TrainerMajors.Include(c => c.Category).Where(s => s.Id == userId).Select(c => c.CategoryID).Distinct().ToList();
 
             List<Category> CurrentMajors = new List<Category>();
+            List<StudentInterest> SameInterestsStudent = new List<StudentInterest>();
 
-            foreach(var OneMajor in majors) {
+            foreach (var OneMajor in majors) {
                 var major = db.Categories.Find(OneMajor);
                 CurrentMajors.Add(major);
+
+                var studentSameInterests = db.studentInterests.Include(c => c.Student).Include(c => c.Category)
+                    .Where(s => s.CategoryID == OneMajor).ToList();
+                foreach(var OneInterest in studentSameInterests)
+                {
+                    SameInterestsStudent.Add(OneInterest);
+                }
             }
 
             IEnumerable<Category> categories = CurrentMajors;
+            IEnumerable<StudentInterest> studentsInterests = SameInterestsStudent;
 
             var viewModel = new NewQuizViewModel
             {
                 trainerMajors = categories,
+                studentInterests = studentsInterests
             };
             return View("CreateQuiz", viewModel);
         }
 
         [HttpPost]
-        public ActionResult CreateNewQuiz(Quiz quiz)
+        public ActionResult CreateNewQuiz(NewQuizViewModel quizViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -66,15 +76,15 @@ namespace OnlineQuizzes.Controllers
                 var viewModel = new NewQuizViewModel
                 {
                     trainerMajors = categories,
-                    quiz = quiz
+                    quiz = quizViewModel.quiz
                 };
                 return View("CreateQuiz", viewModel);
             }
 
-            db.Quizzes.Add(quiz);
+            db.Quizzes.Add(quizViewModel.quiz);
             db.SaveChanges();
 
-            return RedirectToAction("DisplayQuestionsPage", "Questions", new { QuizID = quiz.QuizID });
+            return RedirectToAction("DisplayQuestionsPage", "Questions", new { QuizID = quizViewModel.quiz.QuizID });
         }
 
         public ActionResult QuizDetails(int id)

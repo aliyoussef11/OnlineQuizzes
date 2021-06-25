@@ -34,6 +34,7 @@ namespace OnlineQuizzes.Models
         public DbSet<TrainerMajors> TrainerMajors { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentInterest> studentInterests { get; set; }
+        public DbSet<QuizPermission> QuizPermissions { get; set; }
 
         public static ApplicationDbContext Create()
         {
