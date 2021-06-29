@@ -35,18 +35,16 @@
                 @Html.LabelFor(model => model.quiz.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.quiz.CategoryID, ViewBag.CurrentMajors as SelectList, "--Select Major--",
-                    new { @class = "form-control", @id = "Categories" })
+                 new { @class = "form-control", @id = "Categories" })
                 </div>
             </div>
-
             <div class="form-group">
                 @Html.LabelFor(model => model.StudentIDs, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.StudentIDs, new SelectList(""), "--Select Students--",
-                    new { @class = "form-control", @id = "Students" })
+                    new { @class = "form-control chzn-select", @multiple="true" ,@id = "Students" })
                 </div>
             </div>
-
         }
         <div class="form-group">
             @Html.LabelFor(model => model.quiz.DurationOfQuiz, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -79,11 +77,13 @@
 
 
 @section scripts{
+    
     <script type="text/javascript">
         $(".chzn-select").chosen();
+        $(document).ready(function () {
+           
+        });
     </script>
-
-    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -98,6 +98,7 @@
                         debugger
                         $("#Students").empty();
                         $("#Students").append(response);
+                        $("#Students").trigger("chosen:updated");
                     }
 
                 })

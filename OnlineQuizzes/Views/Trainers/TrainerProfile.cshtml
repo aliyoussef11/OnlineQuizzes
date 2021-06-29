@@ -1,0 +1,37 @@
+﻿@model OnlineQuizzes.ViewModels.TrainerProfile
+@{
+    ViewBag.Title = "TrainerProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TrainerProfile</h2>
+
+<p><span class="glyphicon glyphicon-envelope"></span>: @Model.TrainerEmail</p>
+<p><span class="glyphicon glyphicon-user"></span>: @Model.trainer.TrainerName</p>
+<p><span class="glyphicon glyphicon-phone"></span>: @Model.trainer.PhoneNumber</p>
+<p><span class="glyphicon glyphicon-education"></span>: @Model.trainer.Degree</p>
+<p><span class="glyphicon glyphicon-stats"></span>: @Model.trainer.Experience</p>
+
+<br /><br />
+<table class="table">
+    <tr>
+        <th>
+            Majors
+        </th>
+    </tr>
+
+    @foreach (var item in Model.TrainerMajors)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            
+        </tr>
+    }
+</table>
+
+<td>
+    @Html.ActionLink("Edit", "EditTrainerProfile", "Trainers", null, new { @class = "btn btn-default" })
+    </td>
+

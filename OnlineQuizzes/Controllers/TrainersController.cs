@@ -7,6 +7,7 @@ using System.Data.Entity;
 using OnlineQuizzes.Models;
 using OnlineQuizzes.ViewModels;
 using OnlineQuizzes.Extensions;
+using Microsoft.AspNet.Identity;
 
 namespace OnlineQuizzes.Controllers
 {
@@ -193,6 +194,33 @@ namespace OnlineQuizzes.Controllers
 
             this.AddNotification("Answers Edited Successfully!", NotificationType.SUCCESS);
             return RedirectToAction("QuestionDetails", "Questions", new { id = QuestionID, QuizID = QuizID });
+        }
+
+        public ActionResult TrainerProfile()
+        {
+            var TrainerId = User.Identity.GetUserId();
+            var TrainerEmail = User.Identity.GetUserName();
+
+            var TrainerInfo = db.Trainers.Find(TrainerId);
+
+            List<Category> CurrentMajors = new List<Category>();
+            var majors = db.TrainerMajors.Include(c => c.Category).Where(s => s.Id == TrainerId).Select(c => c.CategoryID).Distinct().ToList();
+
+            foreach (var OneMajor in majors)
+            {
+                var major = db.Categories.Find(OneMajor);
+                CurrentMajors.Add(major);
+            }
+            IEnumerable<Category> trainerMajors = CurrentMajors;
+
+            var ViewModel = new TrainerProfile
+            {
+                trainer = TrainerInfo,
+                TrainerMajors = trainerMajors,
+                TrainerEmail = TrainerEmail
+            };
+
+            return View(ViewModel);
         }
     }
 }

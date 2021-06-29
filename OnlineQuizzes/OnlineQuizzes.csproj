@@ -473,6 +473,7 @@
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
     <Compile Include="ViewModels\NewQuizViewModel.cs" />
     <Compile Include="ViewModels\QuestionsWithQuizID.cs" />
+    <Compile Include="ViewModels\TrainerProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -555,6 +556,7 @@
     <Content Include="Views\Account\StudentRegister.cshtml" />
     <Content Include="Views\Quizs\CreateQuiz.cshtml" />
     <Content Include="Views\Shared\DisplayStudents.cshtml" />
+    <Content Include="Views\Trainers\TrainerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
