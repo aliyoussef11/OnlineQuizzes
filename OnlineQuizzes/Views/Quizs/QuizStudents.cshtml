@@ -1,0 +1,42 @@
+﻿@model OnlineQuizzes.ViewModels.QuizPermissionViewModel
+
+@{
+    ViewBag.Title = "QuizStudents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>QuizStudents</h2>
+
+<p>
+    @Html.ActionLink("Add New Student", "Create", null, new { @class ="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.student.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.student.PhoneNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.QuizPermissions) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.StudentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.PhoneNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new {@class="btn btn-danger"})
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back To Quizzes", "ListOfMyQuizzes", "Trainers")
+</div>

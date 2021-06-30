@@ -20,6 +20,6 @@ namespace OnlineQuizzes.ViewModels
 
         [Required(ErrorMessage = "Please Select Users")]
         [Display(Name = "Students")]
-        public int[] StudentIDs { get; set; }
+        public IEnumerable<string> StudentIDs { get; set; }
     }
 }

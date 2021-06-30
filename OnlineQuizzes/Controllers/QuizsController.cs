@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using OnlineQuizzes.ViewModels;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using OnlineQuizzes.Extensions;
 
 namespace OnlineQuizzes.Controllers
 {
@@ -80,7 +81,29 @@ namespace OnlineQuizzes.Controllers
             db.Quizzes.Add(quizViewModel.quiz);
             db.SaveChanges();
 
+            
+            foreach (var Student in quizViewModel.StudentIDs)
+            {
+                var QuizPermission = new QuizPermission();
+                QuizPermission.QuizID = quizViewModel.quiz.QuizID;
+                QuizPermission.Id = Student;
+                db.QuizPermissions.Add(QuizPermission);
+                db.SaveChanges();
+            }
+
+            this.AddNotification("Quiz Created Successfully", NotificationType.SUCCESS);
             return RedirectToAction("DisplayQuestionsPage", "Questions", new { QuizID = quizViewModel.quiz.QuizID });
+        }
+
+        public ActionResult QuizStudents(int id)
+        {
+            var StudentsOfTheQuiz = db.QuizPermissions.Include(c => c.Quiz).Include(c => c.Student).Where(c => c.QuizID == id).ToList();
+            var viewModel = new QuizPermissionViewModel
+            {
+                QuizId = id,
+                QuizPermissions = StudentsOfTheQuiz
+            };
+            return View(viewModel);
         }
 
         public ActionResult QuizDetails(int id)

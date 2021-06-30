@@ -59,6 +59,7 @@
                         @Html.DisplayFor(modelItem => item.TimeOfQuiz)
                     </td>
                     <td>
+                        @Html.ActionLink("Students", "QuizStudents", "Quizs",new { id = item.QuizID }, new { @class = "btn btn-default glyphicon glyphicon-user" })
                         @Html.ActionLink("Edit", "EditQuiz", new { id = item.QuizID }, new { @class = "btn btn-default" })
                         @Html.ActionLink("Details", "QuizDetails", "Quizs", new { id = item.QuizID }, new { @class = "btn btn-info" })
                         @Html.ActionLink("Delete", "DeleteQuiz", new { id = item.QuizID }, new { @class = "btn btn-danger" })
