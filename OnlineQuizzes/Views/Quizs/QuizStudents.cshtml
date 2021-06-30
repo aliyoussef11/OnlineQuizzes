@@ -6,9 +6,13 @@
 }
 
 <h2>QuizStudents</h2>
+<br />
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
 
 <p>
-    @Html.ActionLink("Add New Student", "Create", null, new { @class ="btn btn-primary"})
+    @Html.ActionLink("Add New Student", "NewPermission", new { QuizID = Model.QuizId}, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -21,19 +25,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.QuizPermissions) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.StudentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.PhoneNumber)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new {@class="btn btn-danger"})
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.QuizPermissions)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.PhoneNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteStudentPermission", new { StudentId = item.Student.Id, QuizID = Model.QuizId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
 

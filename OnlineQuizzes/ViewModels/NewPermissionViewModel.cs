@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using OnlineQuizzes.Models;
 
 namespace OnlineQuizzes.ViewModels
 {
-    public class NewQuizViewModel
+    public class NewPermissionViewModel
     {
-        public IEnumerable<Category> trainerMajors { get; set; }
-
         public Quiz quiz { get; set; }
 
-        public IEnumerable<StudentInterest> studentInterests { get; set; }
-        //public List<SelectList> students { get; set; }
+        public IEnumerable<Student> students { get; set; }
 
         [Required(ErrorMessage = "Please Select Student")]
         [Display(Name = "Students")]
-        public IEnumerable<string> StudentIDs { get; set; }
+        public IEnumerable<string> StudentsIDs { get; set; }
     }
+
 }
