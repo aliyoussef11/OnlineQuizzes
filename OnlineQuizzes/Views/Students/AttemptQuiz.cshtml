@@ -1,0 +1,89 @@
+﻿@model OnlineQuizzes.ViewModels.AttemptQuizViewModel
+@{
+    ViewBag.Title = "AttemptQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="panel panel-default">
+
+    <h6 style="text-align:center" id="timer">Remaining Time: @Model.quiz.DurationOfQuiz mins</h6>
+
+    <div class="panel-body">
+        @using (Html.BeginForm("Check", "Students"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @foreach (var question in Model.MCQQuestions)
+                {
+                    <br />
+                    <label style="color:red">@Html.DisplayFor(modelItem => question.QuestionID) - @Html.DisplayFor(modelItem => question.QuestionText)? (@Html.DisplayFor(modelItem => question.GradeOfQuestion))</label>
+                    <br />
+                    foreach (var answer in Model.MCQAnswers)
+                    {
+                        if (answer.QuestionID == question.QuestionID)
+                        {
+                            <input type="checkbox" id="FirstPossibleAnswer" name="FirstPossibleAnswer" />
+                            <label>@Html.DisplayFor(modelItem => answer.FirstPossibleAnswer)</label>
+                            <br />
+                            <input type="checkbox" id="SecondPossibleAnswer" name="SecondPossibleAnswer" />
+                            <label>@Html.DisplayFor(modelItem => answer.SecondPossibleAnswer)</label>
+                            <br />
+                            if (answer.ThirdPossibleAnswer != null)
+                            {
+                                <input type="checkbox" id="ThirdPossibleAnswer" name="ThirdPossibleAnswer" />
+                                <label>@Html.DisplayFor(modelItem => answer.ThirdPossibleAnswer)</label>
+                                <br />
+                            }
+                            if (answer.FourthPossibleAnswer != null)
+                            {
+                                <input type="checkbox" id="FourthPossibleAnswer" name="FourthPossibleAnswer" />
+                                <label>@Html.DisplayFor(modelItem => answer.FourthPossibleAnswer)</label>
+                                <br />
+                            }
+                        }
+                    }
+                }
+                @foreach (var question in Model.FillQuestions)
+                {
+                    <br />
+                    <label style="color:red">@Html.DisplayFor(modelItem => question.QuestionID) - @Html.DisplayFor(modelItem => question.QuestionText)? (@Html.DisplayFor(modelItem => question.GradeOfQuestion))</label>
+                    <br />
+
+                    <textarea id="Fill" name="Fill" rows="4" cols="50"></textarea>
+                }
+
+            </div>
+            <div class="panel-footer" style="text-align:center">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    @*<script>
+            $('input[type="checkbox"]').on('change', function () {
+                $('input[type="checkbox"]').not(this).prop('checked', false);
+            });
+        </script>*@
+
+    <script>
+        var count = @Model.quiz.DurationOfQuiz;
+
+        var counter = setInterval(timer, 60000); //1000 will  run it every 1 min
+
+        function timer() {
+            count = count - 1;
+            if (count <= 0) {
+                clearInterval(counter);
+                //counter ended, do something 
+                
+            }
+
+            //Do code for showing the number of seconds here
+            document.getElementById("timer").innerHTML ="Remaining Time: "+ count + " mins"; // watch for spelling
+        }
+    </script>
+}
+

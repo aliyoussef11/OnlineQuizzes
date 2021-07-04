@@ -470,6 +470,7 @@
     <Compile Include="Models\TrainerMajors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AttemptQuizViewModel.cs" />
     <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
     <Compile Include="ViewModels\NewPermissionViewModel.cs" />
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
@@ -562,6 +563,7 @@
     <Content Include="Views\Trainers\TrainerProfile.cshtml" />
     <Content Include="Views\Quizs\QuizStudents.cshtml" />
     <Content Include="Views\Quizs\NewPermission.cshtml" />
+    <Content Include="Views\Students\AttemptQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

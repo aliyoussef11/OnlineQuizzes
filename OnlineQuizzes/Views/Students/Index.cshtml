@@ -60,7 +60,7 @@
                         @Html.DisplayFor(modelItem => item.Quiz.TimeOfQuiz)
                     </td>
                     <td>
-                        @if(item.Quiz.TimeOfQuiz > DateTime.Now)
+                        @if(item.Quiz.TimeOfQuiz < DateTime.Now)
                         {
                             <b>Quiz Available</b>
                         }
@@ -70,7 +70,8 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Attempt", "AttemptQuiz", "Students", new { id = item.Quiz.QuizID }, new { @class = "btn btn-default glyphicon glyphicon-pencil" })
+                        @Html.ActionLink("Attempt", "AttemptQuiz", "Students", new { QuizID = item.Quiz.QuizID } , new { @class = "btn btn-default glyphicon glyphicon-pencil" ,
+                        @onclick = "return confirm('Are you sure you wish to Attempt This Quiz?');"})
                     </td>
                 </tr>
             </tbody>
