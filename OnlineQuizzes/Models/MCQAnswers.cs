@@ -32,6 +32,7 @@ namespace OnlineQuizzes.Models
         public string FourthPossibleAnswer { get; set; }
 
         [Display(Name = "The Correct Answer")]
+        [CorrectAnswerChecking]
         [Required]
         public string CorrectAnswer { get; set; }
 

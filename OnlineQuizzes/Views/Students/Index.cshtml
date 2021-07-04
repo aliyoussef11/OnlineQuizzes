@@ -1,8 +1,87 @@
-﻿
+﻿@model IEnumerable<OnlineQuizzes.Models.QuizPermission>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
 
-<h2>Hello I am a Student</h2>
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Quizzes').dataTable();
+        });
+    </script>
+}
+<br />
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
+
+<br />
+<body>
+    <table id="Quizzes">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quiz.QuizName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quiz.Category.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quiz.DurationOfQuiz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quiz.TimeOfQuiz)
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quiz.QuizName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quiz.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quiz.DurationOfQuiz)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quiz.TimeOfQuiz)
+                    </td>
+                    <td>
+                        @if(item.Quiz.TimeOfQuiz > DateTime.Now)
+                        {
+                            <b>Quiz Available</b>
+                        }
+                        else
+                        {
+                            <b>Soon</b>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Attempt", "AttemptQuiz", "Students", new { id = item.Quiz.QuizID }, new { @class = "btn btn-default glyphicon glyphicon-pencil" })
+                    </td>
+                </tr>
+            </tbody>
+        }
+
+    </table>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+
+
+
 
