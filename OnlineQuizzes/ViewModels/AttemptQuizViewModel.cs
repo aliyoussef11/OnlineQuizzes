@@ -13,5 +13,7 @@ namespace OnlineQuizzes.ViewModels
         public IEnumerable<MCQAnswers> MCQAnswers { get; set; }
         public int QuizID { get; set; }
         public Quiz quiz { get; set; }
+
+        public List<QuizAnswer> quizAnswers { get; set; }
     }
 }

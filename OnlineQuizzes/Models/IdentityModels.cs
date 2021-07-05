@@ -35,6 +35,7 @@ namespace OnlineQuizzes.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentInterest> studentInterests { get; set; }
         public DbSet<QuizPermission> QuizPermissions { get; set; }
+        public DbSet<QuizAnswer> QuizAnswers { get; set; }
 
         public static ApplicationDbContext Create()
         {

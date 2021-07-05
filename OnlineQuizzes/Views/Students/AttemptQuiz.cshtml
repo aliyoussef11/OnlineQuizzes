@@ -13,11 +13,30 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                @foreach (var question in Model.MCQQuestions)
+        <div class="form-horizontal">
+            @foreach (var question in Model.MCQQuestions)
+            {
+                for (int i = 1; i < Model.MCQQuestions.Count(); i++)
                 {
                     <br />
-                    <label style="color:red">@Html.DisplayFor(modelItem => question.QuestionID) - @Html.DisplayFor(modelItem => question.QuestionText)? (@Html.DisplayFor(modelItem => question.GradeOfQuestion))</label>
+                    <div class="form-group">
+                        @Html.LabelFor(model => @Model.quizAnswers[i].QuestionID, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => @Model.quizAnswers[i].QuestionID, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control",
+                               @Value =
+                               @Html.DisplayFor(modelItem => question.QuestionID),
+                               @readonly = true
+                           }
+                       })
+                            @Html.ValidationMessageFor(model => @Model.quizAnswers[i].QuestionID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+                    @*<label style="color:red">@Html.DisplayFor(modelItem => question.QuestionID) - @Html.DisplayFor(modelItem => question.QuestionText)? (@Html.DisplayFor(modelItem => question.GradeOfQuestion))</label>*@
                     <br />
                     foreach (var answer in Model.MCQAnswers)
                     {
@@ -58,15 +77,16 @@
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         }
+
     </div>
 </div>
 
 @section Scripts{
-    @*<script>
+    <script>
             $('input[type="checkbox"]').on('change', function () {
                 $('input[type="checkbox"]').not(this).prop('checked', false);
             });
-        </script>*@
+        </script>
 
     <script>
         var count = @Model.quiz.DurationOfQuiz;
