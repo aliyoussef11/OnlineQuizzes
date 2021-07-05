@@ -41,6 +41,7 @@ namespace OnlineQuizzes.Controllers
 
         public ActionResult AttemptQuiz(int QuizID)
         {
+            var studentId = User.Identity.GetUserId();
             var Quiz = db.Quizzes.Find(QuizID);
             if (Quiz.TimeOfQuiz < DateTime.Now)
             {
@@ -65,8 +66,6 @@ namespace OnlineQuizzes.Controllers
                 }
 
                 IEnumerable<MCQAnswers> mCQs = mCQAnswers;
-                IEnumerable<Question> MCQquestions = mCQQuestions;
-                IEnumerable<Question> FillBlank = FillInTheBlankQuestions;
 
                 var viewModel = new AttemptQuizViewModel
                 {
@@ -74,7 +73,8 @@ namespace OnlineQuizzes.Controllers
                     MCQQuestions = mCQQuestions,
                     MCQAnswers = mCQs,
                     QuizID = QuizID,
-                    quiz = Quiz
+                    quiz = Quiz,
+                    StudentID = studentId
                 };
 
                 return View(viewModel);

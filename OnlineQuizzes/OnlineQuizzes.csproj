@@ -463,9 +463,13 @@
     <Compile Include="Migrations\202106242302356_CreateQuizzesPermissionTable.Designer.cs">
       <DependentUpon>202106242302356_CreateQuizzesPermissionTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107051716403_CreateQuizzesAnswersTable.cs" />
-    <Compile Include="Migrations\202107051716403_CreateQuizzesAnswersTable.Designer.cs">
-      <DependentUpon>202107051716403_CreateQuizzesAnswersTable.cs</DependentUpon>
+    <Compile Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.cs" />
+    <Compile Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.Designer.cs">
+      <DependentUpon>202107052125420_CreateQuizzesMCQAnswersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs" />
+    <Compile Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.Designer.cs">
+      <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -478,7 +482,8 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
-    <Compile Include="Models\QuizAnswer.cs" />
+    <Compile Include="Models\QuizFillInTheBlankAnswer.cs" />
+    <Compile Include="Models\QuizMCQAnswer.cs" />
     <Compile Include="Models\QuizPermission.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentInterest.cs" />
@@ -635,8 +640,11 @@
     <EmbeddedResource Include="Migrations\202106242302356_CreateQuizzesPermissionTable.resx">
       <DependentUpon>202106242302356_CreateQuizzesPermissionTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107051716403_CreateQuizzesAnswersTable.resx">
-      <DependentUpon>202107051716403_CreateQuizzesAnswersTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.resx">
+      <DependentUpon>202107052125420_CreateQuizzesMCQAnswersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.resx">
+      <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

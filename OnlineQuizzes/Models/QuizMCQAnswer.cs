@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OnlineQuizzes.Models
 {
-    public class QuizAnswer
+    public class QuizMCQAnswer
     {
         public string Id { get; set; }
         [ForeignKey("Id")]

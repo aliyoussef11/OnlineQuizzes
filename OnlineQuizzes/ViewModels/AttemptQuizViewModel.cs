@@ -8,12 +8,15 @@ namespace OnlineQuizzes.ViewModels
 {
     public class AttemptQuizViewModel
     {
-        public IEnumerable<Question> FillQuestions { get; set; }
-        public IEnumerable<Question> MCQQuestions { get; set; }
+        public List<Question> FillQuestions { get; set; }
+        public List<Question> MCQQuestions { get; set; }
         public IEnumerable<MCQAnswers> MCQAnswers { get; set; }
         public int QuizID { get; set; }
         public Quiz quiz { get; set; }
 
-        public List<QuizAnswer> quizAnswers { get; set; }
+        public List<QuizMCQAnswer> MCQQuestionsAnswers { get; set; }
+        public List<QuizFillInTheBlankAnswer> QuizFillInTheBlankAnswers { get; set; }
+
+        public string StudentID { get; set; }
     }
 }

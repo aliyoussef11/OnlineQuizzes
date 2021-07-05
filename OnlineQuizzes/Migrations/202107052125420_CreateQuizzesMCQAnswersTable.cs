@@ -3,12 +3,12 @@ namespace OnlineQuizzes.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateQuizzesAnswersTable : DbMigration
+    public partial class CreateQuizzesMCQAnswersTable : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.QuizAnswers",
+                "dbo.QuizMCQAnswers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -28,13 +28,13 @@ namespace OnlineQuizzes.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.QuizAnswers", "Id", "dbo.Students");
-            DropForeignKey("dbo.QuizAnswers", "QuizId", "dbo.Quizs");
-            DropForeignKey("dbo.QuizAnswers", "QuestionID", "dbo.Questions");
-            DropIndex("dbo.QuizAnswers", new[] { "QuestionID" });
-            DropIndex("dbo.QuizAnswers", new[] { "QuizId" });
-            DropIndex("dbo.QuizAnswers", new[] { "Id" });
-            DropTable("dbo.QuizAnswers");
+            DropForeignKey("dbo.QuizMCQAnswers", "Id", "dbo.Students");
+            DropForeignKey("dbo.QuizMCQAnswers", "QuizId", "dbo.Quizs");
+            DropForeignKey("dbo.QuizMCQAnswers", "QuestionID", "dbo.Questions");
+            DropIndex("dbo.QuizMCQAnswers", new[] { "QuestionID" });
+            DropIndex("dbo.QuizMCQAnswers", new[] { "QuizId" });
+            DropIndex("dbo.QuizMCQAnswers", new[] { "Id" });
+            DropTable("dbo.QuizMCQAnswers");
         }
     }
 }
