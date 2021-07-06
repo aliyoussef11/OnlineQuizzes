@@ -1,0 +1,36 @@
+﻿@model OnlineQuizzes.ViewModels.StudentProfileViewModel
+@{
+    ViewBag.Title = "StudentProfile";
+}
+
+<h2>StudentProfile</h2>
+
+<p><span class="glyphicon glyphicon-envelope"></span>: @Model.StudentEmail</p>
+<p><span class="glyphicon glyphicon-user"></span>: @Model.student.StudentName</p>
+<p><span class="glyphicon glyphicon-phone"></span>: @Model.student.PhoneNumber</p>
+<p><span class="glyphicon glyphicon-education"></span>: @Model.student.Education</p>
+
+<br />
+<br />
+<table class="table">
+    <tr>
+        <th>
+           Interests
+        </th>
+    </tr>
+
+    @foreach (var item in Model.studentInterests)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+
+        </tr>
+    }
+</table>
+
+<td>
+    @Html.ActionLink("Edit", "EditStudentProfile", "Students", null, new { @class = "btn btn-default" })
+</td>
+

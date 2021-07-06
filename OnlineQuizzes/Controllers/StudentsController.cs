@@ -168,5 +168,49 @@ namespace OnlineQuizzes.Controllers
 
             return View(viewModel);
         }
+
+        public ActionResult MyGrades()
+        {
+            var studentId = User.Identity.GetUserId();
+            List<StudentGrade> studentGrades = new List<StudentGrade>();
+
+            var grades = db.StudentGrades.Include(c => c.Quiz).Where(c => c.Id == studentId).ToList();
+
+            foreach(var grade in grades)
+            {
+                studentGrades.Add(grade);
+            }
+            IEnumerable<StudentGrade> IE_StudentsGrade = studentGrades;
+
+            return View(IE_StudentsGrade);
+        }
+
+        public ActionResult StudentProfile()
+        {
+            var StudentId = User.Identity.GetUserId();
+            var StudentsEmail = User.Identity.GetUserName();
+
+            var StudentInfo = db.Students.Find(StudentId);
+
+            List<Category> CurrentInterests = new List<Category>();
+            var majors = db.studentInterests.Include(c => c.Category).Where(s => s.Id == StudentId).Select(c => c.CategoryID).Distinct().ToList();
+
+            foreach (var OneMajor in majors)
+            {
+                var major = db.Categories.Find(OneMajor);
+                CurrentInterests.Add(major);
+            }
+            IEnumerable<Category> studentInterests = CurrentInterests;
+
+            var ViewModel = new StudentProfileViewModel
+            {
+                student = StudentInfo,
+                studentInterests = studentInterests,
+                StudentEmail = StudentsEmail
+            };
+
+            return View(ViewModel);
+        }
+
     }
 }

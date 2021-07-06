@@ -10,6 +10,14 @@
     {
         <li>@Html.ActionLink("Profile", "TrainerProfile", "Trainers")</li>
     }
+    @if (User.IsInRole("Student"))
+    {
+        <li>@Html.ActionLink("Profile", "StudentProfile", "Students")</li>
+    }
+    @if (User.IsInRole("Student"))
+    {
+        <li>@Html.ActionLink("My Grades", "MyGrades", "Students")</li>
+    }
     <li>
         @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
     </li>

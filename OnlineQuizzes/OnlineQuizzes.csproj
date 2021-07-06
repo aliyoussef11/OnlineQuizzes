@@ -504,6 +504,7 @@
     <Compile Include="ViewModels\NewQuizViewModel.cs" />
     <Compile Include="ViewModels\QuestionsWithQuizID.cs" />
     <Compile Include="ViewModels\QuizPermissionViewModel.cs" />
+    <Compile Include="ViewModels\StudentProfileViewModel.cs" />
     <Compile Include="ViewModels\TrainerProfile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -592,6 +593,8 @@
     <Content Include="Views\Quizs\NewPermission.cshtml" />
     <Content Include="Views\Students\AttemptQuiz.cshtml" />
     <Content Include="Views\Students\SubmitQuiz.cshtml" />
+    <Content Include="Views\Students\MyGrades.cshtml" />
+    <Content Include="Views\Students\StudentProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
