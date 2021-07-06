@@ -471,6 +471,10 @@
     <Compile Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.Designer.cs">
       <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107062005114_CreateStudentGradesTable.cs" />
+    <Compile Include="Migrations\202107062005114_CreateStudentGradesTable.Designer.cs">
+      <DependentUpon>202107062005114_CreateStudentGradesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -486,6 +490,7 @@
     <Compile Include="Models\QuizMCQAnswer.cs" />
     <Compile Include="Models\QuizPermission.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentGrade.cs" />
     <Compile Include="Models\StudentInterest.cs" />
     <Compile Include="Models\Trainer.cs" />
     <Compile Include="Models\TrainerMajors.cs" />
@@ -647,6 +652,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.resx">
       <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107062005114_CreateStudentGradesTable.resx">
+      <DependentUpon>202107062005114_CreateStudentGradesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

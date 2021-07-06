@@ -87,8 +87,10 @@ namespace OnlineQuizzes.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitQuiz(AttemptQuizViewModel attemptQuizViewModel)
+        public ActionResult SubmitQuiz(AttemptQuizViewModel attemptQuizViewModel, int QuizID)
         {
+            var studentId = User.Identity.GetUserId();
+
             double grade = 0;
             double TotalQuizGrade = 0;
             double SuccessGrade = 0;
@@ -104,6 +106,9 @@ namespace OnlineQuizzes.Controllers
                     var AnswersOfCurrentQuestion = db.MCQAnswers.Find(MCQanswer.QuestionID);
                     var CorrectAnswer = AnswersOfCurrentQuestion.CorrectAnswer;
 
+                    //db.AttemptedQuizMCQAnswers.Add(MCQanswer);
+                    //db.SaveChanges();
+
                     if (MCQanswer.Answer == CorrectAnswer)
                     {
                         grade += QuestionDetails.GradeOfQuestion;
@@ -117,11 +122,11 @@ namespace OnlineQuizzes.Controllers
                 VeryGoodGrade = TotalQuizGrade / 1.2;
                 ExcellentGrade = TotalQuizGrade / 1.1;
 
-                if(grade < SuccessGrade)
+                if (grade < SuccessGrade)
                 {
                     Result = "Failed! Try Again With Different Quiz!";
                 }
-                else if(grade > SuccessGrade && grade < GoodGrade)
+                else if (grade > SuccessGrade && grade < GoodGrade)
                 {
                     Result = "You Success But You must Work on Your Abilities!";
                 }
@@ -140,12 +145,27 @@ namespace OnlineQuizzes.Controllers
 
             }
 
+
             var viewModel = new GradeViewModel
             {
                 Grade = grade,
                 TotalQuizGrade = TotalQuizGrade,
                 Result = Result
             };
+
+
+            var StudentGrade = new StudentGrade
+            {
+                Id = studentId,
+                QuizId = QuizID,
+                Grade = grade,
+                TotalGrade = TotalQuizGrade,
+                Result = Result
+            };
+
+            db.StudentGrades.Add(StudentGrade);
+            db.SaveChanges();
+
             return View(viewModel);
         }
     }
