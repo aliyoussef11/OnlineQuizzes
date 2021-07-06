@@ -87,9 +87,66 @@ namespace OnlineQuizzes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Check(AttemptQuizViewModel attemptQuizViewModel)
+        public ActionResult SubmitQuiz(AttemptQuizViewModel attemptQuizViewModel)
         {
-            return View();
+            double grade = 0;
+            double TotalQuizGrade = 0;
+            double SuccessGrade = 0;
+            double GoodGrade = 0;
+            double VeryGoodGrade = 0;
+            double ExcellentGrade = 0;
+            string Result = "";
+            if (attemptQuizViewModel.QuizFillInTheBlankAnswers == null)
+            {
+                foreach (var MCQanswer in attemptQuizViewModel.MCQQuestionsAnswers)
+                {
+                    var QuestionDetails = db.Questions.Find(MCQanswer.QuestionID);
+                    var AnswersOfCurrentQuestion = db.MCQAnswers.Find(MCQanswer.QuestionID);
+                    var CorrectAnswer = AnswersOfCurrentQuestion.CorrectAnswer;
+
+                    if (MCQanswer.Answer == CorrectAnswer)
+                    {
+                        grade += QuestionDetails.GradeOfQuestion;
+                    }
+
+                    TotalQuizGrade += QuestionDetails.GradeOfQuestion;
+                }
+
+                SuccessGrade = TotalQuizGrade / 2;
+                GoodGrade = TotalQuizGrade / 1.4;
+                VeryGoodGrade = TotalQuizGrade / 1.2;
+                ExcellentGrade = TotalQuizGrade / 1.1;
+
+                if(grade < SuccessGrade)
+                {
+                    Result = "Failed! Try Again With Different Quiz!";
+                }
+                else if(grade > SuccessGrade && grade < GoodGrade)
+                {
+                    Result = "You Success But You must Work on Your Abilities!";
+                }
+                else if (grade > GoodGrade && grade < VeryGoodGrade)
+                {
+                    Result = "Good Work!";
+                }
+                else if (grade > VeryGoodGrade && grade < ExcellentGrade)
+                {
+                    Result = "Very Good Work Keep Going!";
+                }
+                else if (grade > ExcellentGrade)
+                {
+                    Result = "Excellent Work .. !";
+                }
+
+            }
+
+            var viewModel = new GradeViewModel
+            {
+                Grade = grade,
+                TotalQuizGrade = TotalQuizGrade,
+                Result = Result
+            };
+            return View(viewModel);
         }
     }
 }

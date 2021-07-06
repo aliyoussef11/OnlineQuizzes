@@ -25,7 +25,7 @@
                     <h4 class="modal-title" style="text-align:center" id="timer">Remaining Time: @Model.quiz.DurationOfQuiz</h4>
                 </div>
                 <div class="modal-body">
-                    @using (Html.BeginForm("Check", "Students"))
+                    @using (Html.BeginForm("SubmitQuiz", "Students"))
                     {
                         @Html.AntiForgeryToken()
 
@@ -142,14 +142,21 @@
 
 </script>
 <script>
-    //check for Navigation Timing API support
+    //check for Navigation Timing API support 
     if (window.performance) {
         console.info("window.performance works fine on this browser");
     }
     console.info(performance.navigation.type);
+    // (Reload)
     if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
         document.getElementById("Save").click();
-    } else {
+    }
+    else {
         console.info("This page is not reloaded");
     }
+</script>
+<script>
+    window.onpopstate = function () {
+        document.getElementById("Save").click();
+    }; history.pushState({}, '');
 </script>
