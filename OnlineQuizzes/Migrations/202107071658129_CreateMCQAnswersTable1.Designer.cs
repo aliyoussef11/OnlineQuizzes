@@ -7,13 +7,13 @@ namespace OnlineQuizzes.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateQuizzesMCQAnswersTable : IMigrationMetadata
+    public sealed partial class CreateMCQAnswersTable1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateQuizzesMCQAnswersTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateMCQAnswersTable1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202107052125420_CreateQuizzesMCQAnswersTable"; }
+            get { return "202107071658129_CreateMCQAnswersTable1"; }
         }
         
         string IMigrationMetadata.Source

@@ -463,17 +463,17 @@
     <Compile Include="Migrations\202106242302356_CreateQuizzesPermissionTable.Designer.cs">
       <DependentUpon>202106242302356_CreateQuizzesPermissionTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.cs" />
-    <Compile Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.Designer.cs">
-      <DependentUpon>202107052125420_CreateQuizzesMCQAnswersTable.cs</DependentUpon>
+    <Compile Include="Migrations\202107071651241_CreateFILLIBAnswersTable.cs" />
+    <Compile Include="Migrations\202107071651241_CreateFILLIBAnswersTable.Designer.cs">
+      <DependentUpon>202107071651241_CreateFILLIBAnswersTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs" />
-    <Compile Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.Designer.cs">
-      <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
+    <Compile Include="Migrations\202107071658129_CreateMCQAnswersTable1.cs" />
+    <Compile Include="Migrations\202107071658129_CreateMCQAnswersTable1.Designer.cs">
+      <DependentUpon>202107071658129_CreateMCQAnswersTable1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202107062005114_CreateStudentGradesTable.cs" />
-    <Compile Include="Migrations\202107062005114_CreateStudentGradesTable.Designer.cs">
-      <DependentUpon>202107062005114_CreateStudentGradesTable.cs</DependentUpon>
+    <Compile Include="Migrations\202107071704376_CreateStudentGradeTable.cs" />
+    <Compile Include="Migrations\202107071704376_CreateStudentGradeTable.Designer.cs">
+      <DependentUpon>202107071704376_CreateStudentGradeTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -486,11 +486,11 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionType.cs" />
     <Compile Include="Models\Quiz.cs" />
-    <Compile Include="Models\QuizFillInTheBlankAnswer.cs" />
-    <Compile Include="Models\QuizMCQAnswer.cs" />
+    <Compile Include="Models\QuizFillIBAnswer.cs" />
+    <Compile Include="Models\QuizMCQsAnswer.cs" />
     <Compile Include="Models\QuizPermission.cs" />
+    <Compile Include="Models\Student-Grade.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentGrade.cs" />
     <Compile Include="Models\StudentInterest.cs" />
     <Compile Include="Models\Trainer.cs" />
     <Compile Include="Models\TrainerMajors.cs" />
@@ -595,6 +595,7 @@
     <Content Include="Views\Students\SubmitQuiz.cshtml" />
     <Content Include="Views\Students\MyGrades.cshtml" />
     <Content Include="Views\Students\StudentProfile.cshtml" />
+    <Content Include="Views\Students\Pending.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -650,14 +651,14 @@
     <EmbeddedResource Include="Migrations\202106242302356_CreateQuizzesPermissionTable.resx">
       <DependentUpon>202106242302356_CreateQuizzesPermissionTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107052125420_CreateQuizzesMCQAnswersTable.resx">
-      <DependentUpon>202107052125420_CreateQuizzesMCQAnswersTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107071651241_CreateFILLIBAnswersTable.resx">
+      <DependentUpon>202107071651241_CreateFILLIBAnswersTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107052127445_CreateQuizzesFillInTheBlankAnswersTable.resx">
-      <DependentUpon>202107052127445_CreateQuizzesFillInTheBlankAnswersTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107071658129_CreateMCQAnswersTable1.resx">
+      <DependentUpon>202107071658129_CreateMCQAnswersTable1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107062005114_CreateStudentGradesTable.resx">
-      <DependentUpon>202107062005114_CreateStudentGradesTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107071704376_CreateStudentGradeTable.resx">
+      <DependentUpon>202107071704376_CreateStudentGradeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

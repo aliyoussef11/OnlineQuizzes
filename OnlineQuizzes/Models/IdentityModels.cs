@@ -35,9 +35,9 @@ namespace OnlineQuizzes.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentInterest> studentInterests { get; set; }
         public DbSet<QuizPermission> QuizPermissions { get; set; }
-        public DbSet<QuizMCQAnswer> AttemptedQuizMCQAnswers { get; set; }
-        public DbSet<QuizFillInTheBlankAnswer> AttemptedQuizFillBlankAnswers { get; set; }
-        public DbSet<StudentGrade> StudentGrades { get; set; }
+        public DbSet<QuizMCQsAnswer> QuizMCQsAnswers { get; set; }
+        public DbSet<QuizFillIBAnswer> QuizFillIBAnswers { get; set; }
+        public DbSet<Student_Grade> StudentGrades { get; set; }
 
         public static ApplicationDbContext Create()
         {

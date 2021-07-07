@@ -14,8 +14,8 @@ namespace OnlineQuizzes.ViewModels
         public int QuizID { get; set; }
         public Quiz quiz { get; set; }
 
-        public List<QuizMCQAnswer> MCQQuestionsAnswers { get; set; }
-        public List<QuizFillInTheBlankAnswer> QuizFillInTheBlankAnswers { get; set; }
+        public List<QuizMCQsAnswer> MCQQuestionsAnswers { get; set; }
+        public List<QuizFillIBAnswer> QuizFillInTheBlankAnswers { get; set; }
 
         public string StudentID { get; set; }
     }

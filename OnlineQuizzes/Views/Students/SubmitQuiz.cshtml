@@ -34,4 +34,8 @@
         </div>
     </div>
 </div>
-
+<script>
+    window.onpopstate = function () {
+        alert("Dont Press Back .. !");
+    }; history.pushState({}, '');
+</script>

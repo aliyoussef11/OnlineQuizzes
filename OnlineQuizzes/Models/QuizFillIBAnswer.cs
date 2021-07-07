@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace OnlineQuizzes.Models
 {
-    public class QuizFillInTheBlankAnswer
+    public class QuizFillIBAnswer
     {
+        [Key]
+        public int FillIBAnswerID { get; set; }
+
         public string Id { get; set; }
         [ForeignKey("Id")]
         public virtual Student Student { get; set; }

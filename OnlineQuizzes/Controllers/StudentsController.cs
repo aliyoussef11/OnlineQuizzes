@@ -57,7 +57,8 @@ namespace OnlineQuizzes.Controllers
                     if (question.QuestionType.Type == "Multiple Choice")
                     {
                         mCQQuestions.Add(question);
-                        mCQAnswers.Add(db.MCQAnswers.Find(question.QuestionID));
+                        var answer = db.MCQAnswers.Where(s => s.QuestionID == question.QuestionID).SingleOrDefault();
+                        mCQAnswers.Add(answer);
                     }
                     else
                     {
@@ -98,6 +99,7 @@ namespace OnlineQuizzes.Controllers
             double VeryGoodGrade = 0;
             double ExcellentGrade = 0;
             string Result = "";
+            var viewModel = new GradeViewModel();
             if (attemptQuizViewModel.QuizFillInTheBlankAnswers == null)
             {
                 foreach (var MCQanswer in attemptQuizViewModel.MCQQuestionsAnswers)
@@ -106,8 +108,8 @@ namespace OnlineQuizzes.Controllers
                     var AnswersOfCurrentQuestion = db.MCQAnswers.Find(MCQanswer.QuestionID);
                     var CorrectAnswer = AnswersOfCurrentQuestion.CorrectAnswer;
 
-                    //db.AttemptedQuizMCQAnswers.Add(MCQanswer);
-                    //db.SaveChanges();
+                    db.QuizMCQsAnswers.Add(MCQanswer);
+                    db.SaveChanges();
 
                     if (MCQanswer.Answer == CorrectAnswer)
                     {
@@ -143,28 +145,48 @@ namespace OnlineQuizzes.Controllers
                     Result = "Excellent Work .. !";
                 }
 
+                viewModel = new GradeViewModel
+                {
+                    Grade = grade,
+                    TotalQuizGrade = TotalQuizGrade,
+                    Result = Result
+                };
+
+
+                var StudentGrade = new Student_Grade
+                {
+                    Id = studentId,
+                    QuizId = QuizID,
+                    Grade = grade,
+                    TotalGrade = TotalQuizGrade,
+                    Result = Result
+                };
+
+                db.StudentGrades.Add(StudentGrade);
+                db.SaveChanges();
+
+            }
+            else
+            {
+                foreach(var fill in attemptQuizViewModel.QuizFillInTheBlankAnswers)
+                {
+                    db.QuizFillIBAnswers.Add(fill);
+                    db.SaveChanges();
+                }
+
+                if (attemptQuizViewModel.MCQQuestionsAnswers != null)
+                {
+                    foreach (var mcq in attemptQuizViewModel.MCQQuestionsAnswers)
+                    {
+                        db.QuizMCQsAnswers.Add(mcq);
+                        db.SaveChanges();
+                    }
+                }
+
+                return View("Pending");
             }
 
-
-            var viewModel = new GradeViewModel
-            {
-                Grade = grade,
-                TotalQuizGrade = TotalQuizGrade,
-                Result = Result
-            };
-
-
-            var StudentGrade = new StudentGrade
-            {
-                Id = studentId,
-                QuizId = QuizID,
-                Grade = grade,
-                TotalGrade = TotalQuizGrade,
-                Result = Result
-            };
-
-            db.StudentGrades.Add(StudentGrade);
-            db.SaveChanges();
+            
 
             return View(viewModel);
         }
@@ -172,7 +194,7 @@ namespace OnlineQuizzes.Controllers
         public ActionResult MyGrades()
         {
             var studentId = User.Identity.GetUserId();
-            List<StudentGrade> studentGrades = new List<StudentGrade>();
+            List<Student_Grade> studentGrades = new List<Student_Grade>();
 
             var grades = db.StudentGrades.Include(c => c.Quiz).Where(c => c.Id == studentId).ToList();
 
@@ -180,7 +202,7 @@ namespace OnlineQuizzes.Controllers
             {
                 studentGrades.Add(grade);
             }
-            IEnumerable<StudentGrade> IE_StudentsGrade = studentGrades;
+            IEnumerable<Student_Grade> IE_StudentsGrade = studentGrades;
 
             return View(IE_StudentsGrade);
         }
