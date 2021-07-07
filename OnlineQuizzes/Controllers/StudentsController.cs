@@ -92,6 +92,13 @@ namespace OnlineQuizzes.Controllers
         {
             var studentId = User.Identity.GetUserId();
 
+            //Delete The permission - Attempt one Time
+            var AttemptedQuiz = db.QuizPermissions.Where(s=>s.Id == studentId).Where(s=>s.QuizID == QuizID)
+                .SingleOrDefault();
+
+            db.QuizPermissions.Remove(AttemptedQuiz);
+            db.SaveChanges();
+
             double grade = 0;
             double TotalQuizGrade = 0;
             double SuccessGrade = 0;
@@ -108,8 +115,8 @@ namespace OnlineQuizzes.Controllers
                     var AnswersOfCurrentQuestion = db.MCQAnswers.Find(MCQanswer.QuestionID);
                     var CorrectAnswer = AnswersOfCurrentQuestion.CorrectAnswer;
 
-                    db.QuizMCQsAnswers.Add(MCQanswer);
-                    db.SaveChanges();
+                    //db.QuizMCQsAnswers.Add(MCQanswer);
+                    //db.SaveChanges();
 
                     if (MCQanswer.Answer == CorrectAnswer)
                     {

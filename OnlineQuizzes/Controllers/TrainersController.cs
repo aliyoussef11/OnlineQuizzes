@@ -223,6 +223,101 @@ namespace OnlineQuizzes.Controllers
             return View(ViewModel);
         }
 
-        
+        public ActionResult Notification()
+        {
+            var TrainerId = User.Identity.GetUserId();
+            var myQuizzes = db.Quizzes.Where(c => c.TrainerName == User.Identity.Name).ToList();
+
+            var StudentName = "";
+            var Helper = new QuizMCQsAnswer();
+            var Helper2 = new QuizFillIBAnswer();
+            
+            List<Students_sAttemptedQuizViewModel> students_SAttemptedQuizzes = new List<Students_sAttemptedQuizViewModel>();
+
+            foreach (var OneQuiz in myQuizzes)
+            {
+                Helper = db.QuizMCQsAnswers.Include(c=>c.Student).Where(s => s.QuizId == OneQuiz.QuizID).FirstOrDefault();
+                Helper2 = db.QuizFillIBAnswers.Include(c => c.Student).Where(s => s.QuizId == OneQuiz.QuizID).FirstOrDefault();
+                if (Helper == null)
+                {
+                    StudentName = Helper2.Student.StudentName;
+                }
+                else
+                {
+                    StudentName = Helper.Student.StudentName;
+                }
+
+                var viewModel = new Students_sAttemptedQuizViewModel
+                {
+                    StudentName = StudentName,
+                    quiz = OneQuiz
+                };
+
+                students_SAttemptedQuizzes.Add(viewModel);
+            }
+
+            IEnumerable<Students_sAttemptedQuizViewModel> viewModels = students_SAttemptedQuizzes;
+
+            var HelperViewModel = new AttemptedStudentListHelperViewModel
+            {
+                students_S = viewModels
+            };
+
+            return View(HelperViewModel);
+        }
+
+        public ActionResult CorrectQuiz(string StudentName, int QuizID)
+        {
+            var StudentID = db.Students.Where(s => s.StudentName == StudentName)
+                .Select(c => c.Id).SingleOrDefault();
+
+            var QuizMCQAnswers = db.QuizMCQsAnswers.Where(c => c.Id == StudentID).Where(c => c.QuizId == QuizID)
+                .ToList();
+
+            double GradeWithoutFillinTheBlankCorrection = 0;
+            foreach(var mcqAnswer in QuizMCQAnswers)
+            {
+                var MCQAnswer = db.MCQAnswers.Where(s=>s.QuestionID == mcqAnswer.QuestionID).SingleOrDefault();
+                var question = db.Questions.Find(mcqAnswer.QuestionID);
+
+                if(mcqAnswer.Answer == MCQAnswer.CorrectAnswer)
+                {
+                    GradeWithoutFillinTheBlankCorrection += question.GradeOfQuestion;
+                }
+            }
+
+            var FillIBAnswers = db.QuizFillIBAnswers.Where(c => c.Id == StudentID).Where(c => c.QuizId == QuizID)
+                .ToList();
+
+            List<FillInBlankQuestionsWithQuestionViewModel> fillInBlankQuestions = new List<FillInBlankQuestionsWithQuestionViewModel>();
+            foreach(var FIBQ in FillIBAnswers)
+            {
+                var question = db.Questions.Find(FIBQ.QuestionID);
+
+                var viewModel = new FillInBlankQuestionsWithQuestionViewModel
+                {
+                    quizFillIBAnswer = FIBQ,
+                    question = question
+                };
+
+                fillInBlankQuestions.Add(viewModel);
+            }
+
+            IEnumerable<FillInBlankQuestionsWithQuestionViewModel> fillInBlanks = fillInBlankQuestions;
+
+            var FillInBlankViewModelHelper = new FInBlankQuestionWithMCQGrade
+            {
+                fillInBlanks = fillInBlanks,
+                GradeWithoutFillInBlankQuestion = GradeWithoutFillinTheBlankCorrection
+            };
+
+            return View(FillInBlankViewModelHelper);
+        }
+
+        [HttpPost]
+        public ActionResult Check(FInBlankQuestionWithMCQGrade fIn, double GradeWithoutFill)
+        {
+            return View();
+        }
     }
 }

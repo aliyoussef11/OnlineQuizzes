@@ -71,7 +71,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("Attempt", "AttemptQuiz", "Students", new { QuizID = item.Quiz.QuizID } , new { @class = "btn btn-default glyphicon glyphicon-pencil" ,
-                        @onclick = "return confirm('Are you sure you wish to Attempt This Quiz?');"})
+                        @onclick = "return confirm('If You click Ok You cannot Go back, Are you sure?');"})
                     </td>
                 </tr>
             </tbody>

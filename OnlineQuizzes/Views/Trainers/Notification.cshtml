@@ -1,0 +1,55 @@
+﻿@model OnlineQuizzes.ViewModels.AttemptedStudentListHelperViewModel
+@{
+    ViewBag.Title = "Notification";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Grades').dataTable();
+        });
+    </script>
+}
+<br />
+
+<body>
+    <table id="Grades">
+        <thead>
+            <tr>
+                <th>
+                    Student Name
+                </th>
+                <th>
+                    Quiz Name
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.students_S)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quiz.QuizName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Correct This Quiz", "CorrectQuiz", new { StudentName = item.StudentName, QuizID = item.quiz.QuizID}, new { @class = "btn btn-info" })
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+
+    </table>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")

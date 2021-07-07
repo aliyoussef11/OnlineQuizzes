@@ -496,15 +496,20 @@
     <Compile Include="Models\TrainerMajors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AttemptedStudentListHelperViewModel.cs" />
     <Compile Include="ViewModels\AttemptQuizViewModel.cs" />
+    <Compile Include="ViewModels\FillInBlankQuestionsWithQuestionViewModel.cs" />
+    <Compile Include="ViewModels\FInBlankQuestionWithMCQGrade.cs" />
     <Compile Include="ViewModels\GradeViewModel.cs" />
     <Compile Include="ViewModels\MCQWithQuestionIDViewModel.cs" />
     <Compile Include="ViewModels\NewPermissionViewModel.cs" />
     <Compile Include="ViewModels\NewQuestionViewModel.cs" />
     <Compile Include="ViewModels\NewQuizViewModel.cs" />
+    <Compile Include="ViewModels\QuestionIDWithQuestionGradeViewModel.cs" />
     <Compile Include="ViewModels\QuestionsWithQuizID.cs" />
     <Compile Include="ViewModels\QuizPermissionViewModel.cs" />
     <Compile Include="ViewModels\StudentProfileViewModel.cs" />
+    <Compile Include="ViewModels\Students%27sAttemptedQuizViewModel.cs" />
     <Compile Include="ViewModels\TrainerProfile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -596,6 +601,8 @@
     <Content Include="Views\Students\MyGrades.cshtml" />
     <Content Include="Views\Students\StudentProfile.cshtml" />
     <Content Include="Views\Students\Pending.cshtml" />
+    <Content Include="Views\Trainers\Notification.cshtml" />
+    <Content Include="Views\Trainers\CorrectQuiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,38 @@
-﻿
-@{
-    ViewBag.Title = "Pending";
-}
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
-<h2>You Grade is Pending</h2>
+<!-- Modal -->
+<div class="modal show" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="text-align:center">Final Grade:</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" role="alert">
+                    Grade is Pending! Please Wait for trainer to Correct Your Quiz ...
+                </div>
+            </div>
+            <div class="modal-footer">
+                @Html.ActionLink("Got It", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onpopstate = function () {
+        alert("Dont Press Back .. !");
+    }; history.pushState({}, '');
+</script>
+
 

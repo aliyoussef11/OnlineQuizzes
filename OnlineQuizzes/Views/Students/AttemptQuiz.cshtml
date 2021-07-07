@@ -45,9 +45,10 @@
                                 <br />
                                 foreach (var answer in Model.MCQAnswers)
                                 {
-
-                                    if (answer.QuestionID == Model.MCQQuestions[i].QuestionID)
+                                    if (answer != null)
                                     {
+                                        if (answer.QuestionID == Model.MCQQuestions[i].QuestionID)
+                                        {
 
                                         <div class="checkbox">
 
@@ -62,23 +63,24 @@
                                                 @Html.DisplayFor(modelItem => answer.SecondPossibleAnswer)
                                             </label>
                                         </div>
-                                        if (answer.ThirdPossibleAnswer != null)
-                                        {
+                                            if (answer.ThirdPossibleAnswer != null)
+                                            {
                                             <div class="checkbox">
                                                 <label>
                                                     @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.ThirdPossibleAnswer, @readonly = true } })
                                                     @Html.DisplayFor(modelItem => answer.ThirdPossibleAnswer)
                                                 </label>
                                             </div>
-                                        }
-                                        if (answer.FourthPossibleAnswer != null)
-                                        {
+                                            }
+                                            if (answer.FourthPossibleAnswer != null)
+                                            {
                                             <div class="checkbox">
                                                 <label>
                                                     @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.FourthPossibleAnswer, @readonly = true } })
                                                     @Html.DisplayFor(modelItem => answer.FourthPossibleAnswer)
                                                 </label>
                                             </div>
+                                            }
                                         }
                                     }
                                 }
