@@ -241,5 +241,77 @@ namespace OnlineQuizzes.Controllers
             return View(ViewModel);
         }
 
+        public ActionResult EditStudentProfile()
+        {
+            var StudentId = User.Identity.GetUserId();
+
+            var studentInfo = db.Students.Find(StudentId);
+            var interests = db.studentInterests.Include(s => s.Category).Where(s => s.Id == StudentId).ToList();
+
+            var AllInterests = db.Categories.ToList();
+
+            var viewModel = new EditStudentProfileViewModel
+            {
+                student = studentInfo,
+                studentInterests = interests,
+                allMajors = AllInterests
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditStudentProfile(EditStudentProfileViewModel editStudent)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                var StudentID = User.Identity.GetUserId();
+
+                var studentInfo = db.Students.Find(StudentID);
+                var Majors = db.studentInterests.Include(s => s.Category).Where(s => s.Id == StudentID).ToList();
+
+                var AllMajors = db.Categories.ToList();
+
+                var viewModel = new EditStudentProfileViewModel
+                {
+                    student = studentInfo,
+                    studentInterests = Majors,
+                    allMajors = AllMajors,
+                    studentBackEdit = editStudent.studentBackEdit
+                };
+
+                return View(viewModel);
+            }
+
+            var ID = User.Identity.GetUserId();
+            var StudentCurrentMajors = db.studentInterests.Where(s => s.Id == ID).ToList();
+
+            if (StudentCurrentMajors != null)
+            {
+                foreach (var interest in StudentCurrentMajors)
+                {
+                    db.studentInterests.Remove(interest);
+                }
+            }
+
+            db.Entry(editStudent.student).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var OneMajor = new StudentInterest
+            {
+                Id = ID
+            };
+            foreach (var major in editStudent.Interests)
+            {
+                OneMajor.CategoryID = major;
+                db.studentInterests.Add(OneMajor);
+                db.SaveChanges();
+            }
+
+            this.AddNotification("Profile Edited Successfully ...", NotificationType.SUCCESS);
+            return RedirectToAction("StudentProfile");
+        }
+
     }
 }

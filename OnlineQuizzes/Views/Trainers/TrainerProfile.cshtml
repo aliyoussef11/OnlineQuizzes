@@ -5,6 +5,9 @@
 }
 
 <h2>TrainerProfile</h2>
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
 
 <p><span class="glyphicon glyphicon-envelope"></span>: @Model.TrainerEmail</p>
 <p><span class="glyphicon glyphicon-user"></span>: @Model.trainer.TrainerName</p>
@@ -12,7 +15,8 @@
 <p><span class="glyphicon glyphicon-education"></span>: @Model.trainer.Degree</p>
 <p><span class="glyphicon glyphicon-stats"></span>: @Model.trainer.Experience</p>
 
-<br /><br />
+<br />
+<br />
 <table class="table">
     <tr>
         <th>
@@ -26,12 +30,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
-            
+
         </tr>
     }
 </table>
 
 <td>
     @Html.ActionLink("Edit", "EditTrainerProfile", "Trainers", null, new { @class = "btn btn-default" })
-    </td>
+</td>
 

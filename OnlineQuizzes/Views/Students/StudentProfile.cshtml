@@ -4,6 +4,9 @@
 }
 
 <h2>StudentProfile</h2>
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
 
 <p><span class="glyphicon glyphicon-envelope"></span>: @Model.StudentEmail</p>
 <p><span class="glyphicon glyphicon-user"></span>: @Model.student.StudentName</p>

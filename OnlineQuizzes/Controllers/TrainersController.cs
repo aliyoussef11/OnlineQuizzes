@@ -223,7 +223,78 @@ namespace OnlineQuizzes.Controllers
             return View(ViewModel);
         }
 
-        public ActionResult Notification()
+        public ActionResult EditTrainerProfile()
+        {
+            var TrainerId = User.Identity.GetUserId();
+
+            var trainerInfo = db.Trainers.Find(TrainerId);
+            var Majors = db.TrainerMajors.Include(s=>s.Category).Where(s => s.Id == TrainerId).ToList();
+
+            var AllMajors = db.Categories.ToList();
+
+            var viewModel = new EditTrainerProfileViewModel{
+                trainer = trainerInfo,
+                trainerMajors = Majors,
+                allMajors = AllMajors
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EditTrainerProfile(EditTrainerProfileViewModel editTrainer)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                var TrainerId = User.Identity.GetUserId();
+
+                var trainerInfo = db.Trainers.Find(TrainerId);
+                var Majors = db.TrainerMajors.Include(s => s.Category).Where(s => s.Id == TrainerId).ToList();
+
+                var AllMajors = db.Categories.ToList();
+
+                var viewModel = new EditTrainerProfileViewModel
+                {
+                    trainer = trainerInfo,
+                    trainerMajors = Majors,
+                    allMajors = AllMajors,
+                    trainerBackEdit = editTrainer.trainer
+                };
+
+                return View(viewModel);
+            }
+
+            var ID = User.Identity.GetUserId();
+            var TrainerCurrentMajors = db.TrainerMajors.Where(s => s.Id == ID).ToList();
+
+            if (TrainerCurrentMajors != null)
+            {
+                foreach (var major in TrainerCurrentMajors)
+                {
+                    db.TrainerMajors.Remove(major);
+                }
+            }
+
+            db.Entry(editTrainer.trainer).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var OneMajor = new TrainerMajors
+            {
+                Id = ID
+            };
+            foreach (var major in editTrainer.Majors)
+            {
+                OneMajor.CategoryID = major;
+                db.TrainerMajors.Add(OneMajor);
+                db.SaveChanges();
+            }
+
+            this.AddNotification("Profile Edited Successfully ...", NotificationType.SUCCESS);
+            return RedirectToAction("TrainerProfile");
+        }
+
+            public ActionResult Notification()
         {
             var TrainerId = User.Identity.GetUserId();
             var myQuizzes = db.Quizzes.Where(c => c.TrainerName == User.Identity.Name).ToList();

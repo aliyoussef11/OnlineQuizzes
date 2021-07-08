@@ -138,6 +138,7 @@
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
@@ -498,6 +499,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AttemptedStudentListHelperViewModel.cs" />
     <Compile Include="ViewModels\AttemptQuizViewModel.cs" />
+    <Compile Include="ViewModels\EditStudentProfileViewModel.cs" />
+    <Compile Include="ViewModels\EditTrainerProfileViewModel.cs" />
     <Compile Include="ViewModels\FillInBlankQuestionsWithQuestionViewModel.cs" />
     <Compile Include="ViewModels\FInBlankQuestionWithMCQGrade.cs" />
     <Compile Include="ViewModels\GradeViewModel.cs" />
@@ -604,6 +607,8 @@
     <Content Include="Views\Trainers\Notification.cshtml" />
     <Content Include="Views\Trainers\CorrectQuiz.cshtml" />
     <Content Include="Views\Trainers\ListStudentGrades.cshtml" />
+    <Content Include="Views\Trainers\EditTrainerProfile.cshtml" />
+    <Content Include="Views\Students\EditStudentProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
