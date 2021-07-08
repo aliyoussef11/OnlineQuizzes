@@ -603,6 +603,7 @@
     <Content Include="Views\Students\Pending.cshtml" />
     <Content Include="Views\Trainers\Notification.cshtml" />
     <Content Include="Views\Trainers\CorrectQuiz.cshtml" />
+    <Content Include="Views\Trainers\ListStudentGrades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

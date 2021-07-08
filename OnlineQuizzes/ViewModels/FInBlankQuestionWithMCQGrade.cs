@@ -13,6 +13,9 @@ namespace OnlineQuizzes.ViewModels
         public double GradeWithoutFillInBlankQuestion { get; set; }
         public Student_Grade student_Grade { get; set; }
         public double GradeForEachQuestion { get; set; }
+        public double TotalGrade { get; set; }
+        public Student student { get; set; }
+        public int quizID { get; set; }
 
         public List<QuestionIDWithQuestionGradeViewModel> IDGrade { get; set; }
     }

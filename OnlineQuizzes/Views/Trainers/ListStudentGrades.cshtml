@@ -1,0 +1,64 @@
+﻿@model IEnumerable<OnlineQuizzes.Models.Student_Grade>
+@{
+    ViewBag.Title = "ListStudentGrades";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+@section Scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Grades').dataTable();
+        });
+    </script>
+}
+<br />
+<div class="container body-content">
+    @Html.Partial("_Notifications")
+</div>
+<body>
+    <table id="Grades">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quiz.QuizName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Grade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalGrade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Result)
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quiz.QuizName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalGrade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Result)
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+
+    </table>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+

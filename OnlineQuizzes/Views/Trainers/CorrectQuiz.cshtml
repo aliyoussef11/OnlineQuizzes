@@ -9,35 +9,37 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Check", "Trainers", new { GradeWithoutFill = Model.GradeWithoutFillInBlankQuestion }))
+@using (Html.BeginForm("PostGrade", "Trainers", new { GradeWithoutFill = Model.GradeWithoutFillInBlankQuestion , TotalGrade = Model.TotalGrade, StudentID = Model.student.Id,
+QuizID = Model.quizID}))
         {
             @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+<div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @*@Html.HiddenFor(model => model.student_Grade.AttemptID)*@
 
-    @{ var i = 0;}
-    @foreach (var FINBQ in Model.fillInBlanks) {
 
-        for (i=0; i < Model.fillInBlanks.Count(); i++)
-        {
-         
-        i++;
+
+
+    @for (int i=0; i < 1; i++)
+    {
+    foreach (var FINBQ in Model.fillInBlanks)
+    {
         <div class="form-group">
             <label style="display:none">@Html.DisplayFor(modelItem => Model.IDGrade[i].QuestionID)</label>
-            @Html.EditorFor(model => Model.IDGrade[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = FINBQ.quizFillIBAnswer.QuestionID, @readonly = true , @style="display:none"} })
+            @Html.EditorFor(model => Model.IDGrade[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = FINBQ.quizFillIBAnswer.QuestionID, @readonly = true, @style = "display:none" } })
 
             <label style="color:red">@FINBQ.question.QuestionText (@FINBQ.question.GradeOfQuestion)</label>
             @Html.EditorFor(model => FINBQ.quizFillIBAnswer.Answer, new { htmlAttributes = new { @class = "form-control", @Value = @FINBQ.quizFillIBAnswer.Answer, @readonly = true } })
 
             <label style="color:red">@Html.DisplayFor(model => Model.IDGrade[i].QuestionGrade)</label>
-            @Html.EditorFor(model => Model.IDGrade[i].QuestionGrade, new { htmlAttributes = new { @class = "form-control", @type = "range", @min = "0", @max = @FINBQ.question.GradeOfQuestion } })
+            @Html.EditorFor(model => Model.IDGrade[i].QuestionGrade, new { htmlAttributes = new { @class = "form-control", @min = "0", @max = @FINBQ.question.GradeOfQuestion } })
         </div>
 
-   }
-        
+            i++;
+        }
+
     }
 
     <div class="form-group">
