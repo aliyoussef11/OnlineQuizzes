@@ -112,7 +112,7 @@ namespace OnlineQuizzes.Controllers
                 foreach (var MCQanswer in attemptQuizViewModel.MCQQuestionsAnswers)
                 {
                     var QuestionDetails = db.Questions.Find(MCQanswer.QuestionID);
-                    var AnswersOfCurrentQuestion = db.MCQAnswers.Find(MCQanswer.QuestionID);
+                    var AnswersOfCurrentQuestion = db.MCQAnswers.Where(s=>s.QuestionID == MCQanswer.QuestionID).FirstOrDefault();
                     var CorrectAnswer = AnswersOfCurrentQuestion.CorrectAnswer;
 
                     //db.QuizMCQsAnswers.Add(MCQanswer);

@@ -8,11 +8,11 @@ using OnlineQuizzes.Models;
 
 namespace OnlineQuizzes.Controllers.Api
 {
-    public class AdminController : ApiController
+    public class TrainersController : ApiController
     {
         private ApplicationDbContext db;
 
-        public AdminController()
+        public TrainersController()
         {
             db = new ApplicationDbContext();
         }
