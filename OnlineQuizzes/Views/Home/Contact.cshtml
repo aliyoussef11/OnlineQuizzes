@@ -1,17 +1,33 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<head>
+    <style>
+        #mydiv {
+            background-image: url('/Content/Contact-Us.jpg');
+            background-repeat: repeat;
+            background-size: contain;
+            height: 200px;
+            width: 1050px;
+            margin-left:40px;
+        }
+      
+        .mailto {
+            display: block;
+            text-align: center
+        }
+    </style>
+</head>
+<body style="background-color: #ececec">
+    <br /><br /><br /><br />
+    <div id="mydiv"></div>
+    <div style="text-align:center; height:250px"><br />
+        <div style="color:black; font-size:40px; font-family:Tahoma">Contact Us</div><br /><br /><br />
+        <div>
+            <a class="mailto" href="mailto:asy085@usal.edu.lb" style="color:black">
+                <p><span class="glyphicon glyphicon-envelope"></span>:Mail</p>
+            </a>
+            <p style="color:black;"><span class="glyphicon glyphicon-phone"></span>: 70082977</p>
+        </div>
+    </div>
+</body>

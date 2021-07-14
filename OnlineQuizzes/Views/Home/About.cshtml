@@ -1,7 +1,96 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<head>
+    <style>
+        #div1{
+            float:left;
+            margin-left:200px;
+            margin-top:100px;
+        }
+        #div2 {
+            float: right;
+            margin-right: 200px;
+            margin-top: 100px;
+        }
+        #div1 {
+            width: 96px;
+            box-sizing: content-box;
+            height: 48px;
+            background: #eee;
+            border-color: gray;
+            border-style: solid;
+            border-width: 2px 2px 50px 2px;
+            border-radius: 100%;
+            position: relative;
+        }
 
-<p>Use this area to provide additional information.</p>
+            #div1:before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                background: #eee;
+                border: 18px solid gray;
+                border-radius: 100%;
+                width: 12px;
+                height: 12px;
+                box-sizing: content-box;
+            }
+
+            #div1:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                background: gray;
+                border: 18px solid #eee;
+                border-radius: 100%;
+                width: 12px;
+                height: 12px;
+                box-sizing: content-box;
+            }
+        #div2 {
+            font-size: 10em;
+            display: inline-block;
+            width: 0.4em;
+            box-sizing: content-box;
+            height: 0.4em;
+            border: 0.1em solid gray;
+            position: relative;
+            border-radius: 0.35em;
+        }
+
+            #div2:before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                right: -0.25em;
+                bottom: -0.1em;
+                border-width: 0;
+                background: gray;
+                width: 0.35em;
+                height: 0.08em;
+                transform: rotate(45deg);
+            }
+    </style>
+</head>
+<br />
+<body>
+    <div style="background-image: url('/Content/Gray.jpg');
+height:100px; text-align:center;
+font-size:50px; color:white">
+        About Us
+    </div>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div style="font-size:20px; text-align:center">
+    <br /><br /><br /><br /><b>Our Mission</b></div>
+    <br /><br /><br />
+    <div style="margin-top: 50px; font-size: 18px; text-align:center">Our mission is to help any student to <br /></div>
+    <div style="text-align:center">make connections with trainers. In addition to share any type of information 
+    between<br /> them using interesting Quizzes spread over several categories.</div>
+
+    <br /><br /><br /><br/><br />
+<div style="text-align:center"><i>© 2021 Ali Youssef.  All rights reserved</i></div>
+</body>

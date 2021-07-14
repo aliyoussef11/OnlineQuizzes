@@ -2,23 +2,35 @@
 @{
     ViewBag.Title = "StudentProfile";
 }
-
-<h2>StudentProfile</h2>
+<head>
+    <style>
+        #h3 {
+            height: 140px;
+            width: 130px;
+            background-image: url('/Content/Trainers.jpg');
+            background-repeat: no-repeat;
+            margin-left: 500px;
+        }
+    </style>
+</head>
+<h3 id="h3"></h3>
 <div class="container body-content">
     @Html.Partial("_Notifications")
 </div>
-
-<p><span class="glyphicon glyphicon-envelope"></span>: @Model.StudentEmail</p>
-<p><span class="glyphicon glyphicon-user"></span>: @Model.student.StudentName</p>
-<p><span class="glyphicon glyphicon-phone"></span>: @Model.student.PhoneNumber</p>
-<p><span class="glyphicon glyphicon-education"></span>: @Model.student.Education</p>
-
+<div class="panel panel-default" style="width:50%; margin-left:300px">
+    <div class="panel-body">
+        <p><span class="glyphicon glyphicon-envelope"></span>: @Model.StudentEmail</p>
+        <p><span class="glyphicon glyphicon-user"></span>: @Model.student.StudentName</p>
+        <p><span class="glyphicon glyphicon-phone"></span>: @Model.student.PhoneNumber</p>
+        <p><span class="glyphicon glyphicon-education"></span>: @Model.student.Education</p>
+    </div>
+</div>
 <br />
 <br />
-<table class="table">
+<table class="table" style="width:50%; margin-left:300px">
     <tr>
         <th>
-           Interests
+            Interests
         </th>
     </tr>
 
@@ -34,6 +46,6 @@
 </table>
 
 <td>
-    @Html.ActionLink("Edit", "EditStudentProfile", "Students", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Edit", "EditStudentProfile", "Students", null, new { @class = "btn btn-info", @Style = "margin-left:550px;" })
 </td>
 

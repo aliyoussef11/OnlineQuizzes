@@ -74,6 +74,7 @@ namespace OnlineQuizzes.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please Select Major")]
+        [Display(Name = "Majors")]
         public IEnumerable<int> CategoryIDs { get;set; }
 
         public IEnumerable<Category> Categories { get; set; }
@@ -119,6 +120,7 @@ namespace OnlineQuizzes.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please Select Major")]
+        [Display(Name = "Categories")]
         public IEnumerable<int> CategoryIDs { get; set; }
 
         public IEnumerable<Category> Categories { get; set; }

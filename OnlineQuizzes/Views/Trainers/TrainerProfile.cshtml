@@ -3,21 +3,36 @@
     ViewBag.Title = "TrainerProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>TrainerProfile</h2>
+<head>
+    <style>
+        #h3{
+            height:140px;
+            width:130px;
+            background-image: url('/Content/Trainers.jpg');
+            background-repeat: no-repeat;
+            margin-left: 500px;
+        }
+    </style>
+</head>
+<h3 id="h3"></h3>
 <div class="container body-content">
     @Html.Partial("_Notifications")
 </div>
 
-<p><span class="glyphicon glyphicon-envelope"></span>: @Model.TrainerEmail</p>
-<p><span class="glyphicon glyphicon-user"></span>: @Model.trainer.TrainerName</p>
-<p><span class="glyphicon glyphicon-phone"></span>: @Model.trainer.PhoneNumber</p>
-<p><span class="glyphicon glyphicon-education"></span>: @Model.trainer.Degree</p>
-<p><span class="glyphicon glyphicon-stats"></span>: @Model.trainer.Experience</p>
+<div class="panel panel-default" style="width:50%; margin-left:300px">
+    <div class="panel-body">
+        <p><span class="glyphicon glyphicon-envelope"></span>: @Model.TrainerEmail</p>
+        <p><span class="glyphicon glyphicon-user"></span>: @Model.trainer.TrainerName</p>
+        <p><span class="glyphicon glyphicon-phone"></span>: @Model.trainer.PhoneNumber</p>
+        <p><span class="glyphicon glyphicon-education"></span>: @Model.trainer.Degree</p>
+        <p><span class="glyphicon glyphicon-stats"></span>: @Model.trainer.Experience</p>
+    </div>
+</div>
+
 
 <br />
 <br />
-<table class="table">
+<table class="table" style="width:50%; margin-left:300px">
     <tr>
         <th>
             Majors
@@ -35,7 +50,7 @@
     }
 </table>
 
-<td>
-    @Html.ActionLink("Edit", "EditTrainerProfile", "Trainers", null, new { @class = "btn btn-default" })
+<td >
+    @Html.ActionLink("Edit", "EditTrainerProfile", "Trainers", null, new { @class = "btn btn-info", @Style = "margin-left:550px;" })
 </td>
 

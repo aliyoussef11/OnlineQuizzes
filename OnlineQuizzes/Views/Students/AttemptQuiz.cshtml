@@ -29,82 +29,227 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
+                    <div class="form-horizontal">
 
-                            @for (int i = 0; i < Model.MCQQuestions.Count(); i++)
+                        @for (int i = 0; i < Model.MCQQuestions.Count(); i++)
+                        {
+                            <label style="display:none">@Html.DisplayFor(modelItem => Model.StudentID))</label>
+                            @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Id, new { htmlAttributes = new { @class = "form-control", @Value = Model.StudentID, @readonly = true, @style = "display:none" } })
+
+                            <label style="display: none">@Html.DisplayFor(modelItem => Model.QuizID))</label>
+                            @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].QuizId, new { htmlAttributes = new { @class = "form-control", @Value = Model.QuizID, @readonly = true, @style = "display:none" } })
+                            <br />
+
+                            <label style="color:red">@Html.DisplayFor(modelItem => Model.MCQQuestions[i].QuestionText)? (@Html.DisplayFor(modelItem => Model.MCQQuestions[i].GradeOfQuestion))</label>
+                            @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = Model.MCQQuestions[i].QuestionID, @readonly = true, @style = "display:none" } })
+                            <br />
+                            foreach (var answer in Model.MCQAnswers)
                             {
-                                <label style="display:none">@Html.DisplayFor(modelItem => Model.StudentID))</label>
-                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Id, new { htmlAttributes = new { @class = "form-control", @Value = Model.StudentID, @readonly = true, @style = "display:none" } })
-
-                                <label style="display: none">@Html.DisplayFor(modelItem => Model.QuizID))</label>
-                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].QuizId, new { htmlAttributes = new { @class = "form-control", @Value = Model.QuizID, @readonly = true, @style = "display:none" } })
-                                <br />
-
-                                <label style="color:red">@Html.DisplayFor(modelItem => Model.MCQQuestions[i].QuestionID) - @Html.DisplayFor(modelItem => Model.MCQQuestions[i].QuestionText)? (@Html.DisplayFor(modelItem => Model.MCQQuestions[i].GradeOfQuestion))</label>
-                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = Model.MCQQuestions[i].QuestionID, @readonly = true, @style = "display:none" } })
-                                <br />
-                                foreach (var answer in Model.MCQAnswers)
+                                if (answer != null)
                                 {
-                                    if (answer != null)
+                                    if (answer.QuestionID == Model.MCQQuestions[i].QuestionID)
                                     {
-                                        if (answer.QuestionID == Model.MCQQuestions[i].QuestionID)
-                                        {
 
                                         <div class="checkbox">
 
                                             <label>
-                                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.FirstPossibleAnswer, @readonly = true } })
+                                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.FirstPossibleAnswer, @readonly = true, @id = "an1"+i } })
                                                 @Html.DisplayFor(modelItem => answer.FirstPossibleAnswer)
                                             </label>
+
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.SecondPossibleAnswer, @readonly = true } })
+                                                @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.SecondPossibleAnswer, @readonly = true, @id = "an2"+i } })
                                                 @Html.DisplayFor(modelItem => answer.SecondPossibleAnswer)
                                             </label>
                                         </div>
-                                            if (answer.ThirdPossibleAnswer != null)
-                                            {
+                                        if (answer.ThirdPossibleAnswer != null)
+                                        {
                                             <div class="checkbox">
                                                 <label>
-                                                    @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.ThirdPossibleAnswer, @readonly = true } })
+                                                    @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.ThirdPossibleAnswer, @readonly = true, @id = "an3"+i } })
                                                     @Html.DisplayFor(modelItem => answer.ThirdPossibleAnswer)
                                                 </label>
                                             </div>
-                                            }
-                                            if (answer.FourthPossibleAnswer != null)
-                                            {
+                                        }
+                                        if (answer.FourthPossibleAnswer != null)
+                                        {
                                             <div class="checkbox">
                                                 <label>
-                                                    @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.FourthPossibleAnswer, @readonly = true } })
+                                                    @Html.EditorFor(model => Model.MCQQuestionsAnswers[i].Answer, new { htmlAttributes = new { @type = "checkbox", @Value = answer.FourthPossibleAnswer, @readonly = true, @id = "an4"+i } })
                                                     @Html.DisplayFor(modelItem => answer.FourthPossibleAnswer)
                                                 </label>
                                             </div>
                                             }
-                                        }
+                                            
+                    <script>
+                        for (var i2 = 0; i2 <@Model.MCQQuestions.Count(); i2++) {
+
+                            const checkbox = document.getElementById('an1'+@i)
+                            const checkbox2 = document.getElementById('an2'+@i)
+                            const checkbox3 = document.getElementById('an3'+@i)
+                            const checkbox4 = document.getElementById('an4'+@i)
+
+
+                            checkbox.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox2.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox2.checked = false;
                                     }
-                                }
-                            }
-                            @for (int i = 0; i < Model.FillQuestions.Count(); i++)
-                            {
-                                var ContinuePreviousCount = Model.MCQQuestions.Count() + 1;
-                                <label style="display:none">@Html.DisplayFor(modelItem => Model.StudentID))</label>
-                                @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].Id, new { htmlAttributes = new { @class = "form-control", @Value = Model.StudentID, @readonly = true, @style = "display:none" } })
+                                })
+                            })
+                            checkbox2.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox2.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox3.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox3.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox3.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox3.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox4.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox4.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox4.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox.checked = false;
+                                        checkbox4.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox2.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox3.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox2.checked = false;
+                                        checkbox3.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox3.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox2.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox2.checked = false;
+                                        checkbox3.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox2.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox4.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox2.checked = false;
+                                        checkbox4.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox4.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox2.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox4.checked = false;
+                                        checkbox2.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox3.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox4.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox3.checked = false;
+                                        checkbox4.checked = false;
+                                    }
+                                })
+                            })
+                            checkbox4.addEventListener('change', (event) => {
+                                var e1 = event;
+                                checkbox3.addEventListener('change', (event) => {
+                                    var e2 = event;
+                                    if (e1.target.checked && e2.target.checked) {
+                                        alert("Select Only One");
+                                        checkbox4.checked = false;
+                                        checkbox3.checked = false;
+                                    }
+                                })
+                            })
+                        }
+                    </script>
+            }
+        }
+    }
+                        }
+                        @for (int i = 0; i < Model.FillQuestions.Count(); i++)
+                        {
+                            var ContinuePreviousCount = Model.MCQQuestions.Count() + 1;
+                            <label style="display:none">@Html.DisplayFor(modelItem => Model.StudentID))</label>
+                            @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].Id, new { htmlAttributes = new { @class = "form-control", @Value = Model.StudentID, @readonly = true, @style = "display:none" } })
 
-                                <label style="display: none">@Html.DisplayFor(modelItem => Model.QuizID))</label>
-                                @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].QuizId, new { htmlAttributes = new { @class = "form-control", @Value = Model.QuizID, @readonly = true, @style = "display:none" } })
-                                <br />
+                            <label style="display: none">@Html.DisplayFor(modelItem => Model.QuizID))</label>
+                            @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].QuizId, new { htmlAttributes = new { @class = "form-control", @Value = Model.QuizID, @readonly = true, @style = "display:none" } })
+                            <br />
 
-                                <br />
-                                <label style="color:red">@Html.DisplayFor(modelItem => Model.FillQuestions[i].QuestionID) - @Html.DisplayFor(modelItem => Model.FillQuestions[i].QuestionText)? (@Html.DisplayFor(modelItem => Model.FillQuestions[i].GradeOfQuestion))</label>
-                                @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = Model.FillQuestions[i].QuestionID, @readonly = true, @style = "display:none" } })
-                                <br />
+                            <br />
+                            <label style="color:red">@Html.DisplayFor(modelItem => Model.FillQuestions[i].QuestionText)? (@Html.DisplayFor(modelItem => Model.FillQuestions[i].GradeOfQuestion))</label>
+                            @Html.EditorFor(model => Model.QuizFillInTheBlankAnswers[i].QuestionID, new { htmlAttributes = new { @class = "form-control", @Value = Model.FillQuestions[i].QuestionID, @readonly = true, @style = "display:none" } })
+                            <br />
 
-                                @Html.TextAreaFor(model => Model.QuizFillInTheBlankAnswers[i].Answer, new { cols = 35, @rows = 3 })
-                                @*<textarea id="Fill" name="Fill" rows="4" cols="50"></textarea>*@
-                            }
+                            @Html.TextAreaFor(model => Model.QuizFillInTheBlankAnswers[i].Answer, new { cols = 35, @rows = 3 })
+                            @*<textarea id="Fill" name="Fill" rows="4" cols="50"></textarea>*@
+                        }
 
-                        </div>
+                    </div>
                         <div class="modal-footer">
                             <input id="Save" type="submit" value="Submit" class="btn btn-primary" />
                         </div>
@@ -115,9 +260,10 @@
     </div>
 
 @*<script>
-        $('input[type="checkbox"]').on('change', function () {
-            $('input[type="checkbox"]').not(this).prop('checked', false);
+        $('.Answer-list').on('change', function () {
+            $('.Answer-list').not(this).prop('checked', false);
         });
+
     </script>*@
 <script type="text/javascript">
     function startTimer(duration, display) {
@@ -143,7 +289,7 @@
         startTimer(duration, display);
     };
 
-</script>
+                    </script>
 <script>
     //check for Navigation Timing API support 
     if (window.performance) {
