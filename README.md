@@ -31,8 +31,5 @@ Trainers can assign grades to students based on their performance during the cor
 Students will receive their grades, along with additional performance indicators (e.g., pass/fail status, excellent, very good) via notifications and the "My Grades" section.
 Both students and trainers will receive notifications regarding quiz assignments, quiz completion, and grade publication.
 
-**Contributing:**
-We welcome contributions to the Quiz Management System project. To contribute, please follow these steps:
-
 License
 This project is licensed under the MIT License.
