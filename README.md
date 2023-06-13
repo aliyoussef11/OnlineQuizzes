@@ -16,8 +16,6 @@ Notifications: Students and trainers receive notifications regarding quiz assign
 Clone the repository:
 git clone https://github.com/aliyoussef11/OnlineQuizzes.git
 
-cd quiz-management-system
-
 Run the database migrations:
 Update-Database
 
